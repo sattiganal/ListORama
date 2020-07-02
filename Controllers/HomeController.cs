@@ -20,10 +20,19 @@ namespace ListORama.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List myList = new List();
+            myList.listID = 1;
+            myList.listName = "Shopping List";
+            myList.listStatus = "Complete";
+
+
+            List[] allLists = { myList};
+            Lists listsToDisplay = new Lists();
+            listsToDisplay.list = allLists;
+            return View(listsToDisplay);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Settings()
         {
             return View();
         }
