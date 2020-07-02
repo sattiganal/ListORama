@@ -32,6 +32,11 @@ namespace ListORama.Controllers
             return View(listsToDisplay);
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         public IActionResult Settings()
         {
             return View();
