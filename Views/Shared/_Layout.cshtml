@@ -1,28 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@ViewData["Title"] - ListORama</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="~/css/site.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>@ViewData["Title"] - List-O-Rama</title>
+    <link href="~/css/app.css" rel="stylesheet">
     <style>
         .bd-placeholder-img {
-          font-size: 1.125rem;
-          text-anchor: middle;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="collapse bg-dark" id="navbarHeader">
+        <div class="collapse bkgd-dark" id="navbarHeader">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-7 py-4">
@@ -48,17 +42,9 @@
                 </div>
             </div>
         </div>
-        <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container d-flex justify-content-between">
-                <a href="/" class="navbar-brand d-flex align-items-center">
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false">
-                      <path d="M2235 5225 c-27 -8 -61 -14 -75 -15 -14 0 -34 -7 -44 -15 -11 -8 -26 -15 -34 -15 -8 0 -34 -13 -59 -30 -24 -16 -47 -30 -50 -30 -22 0 -183 -183 -183 -208 0 -5 -7 -15 -15 -22 -8 -7 -15 -23 -15 -35 0 -12 -7 -28 -15 -35 -8 -7 -15 -21 -15 -32 0 -11 -5 -29 -12 -41 -6 -12 -15 -42 -19 -67 -4 -25 -12 -63 -18 -85 -17 -64 -14 -252 5 -310 9 -27 20 -57 25 -65 5 -8 13 -24 18 -36 13 -30 100 -103 130 -111 14 -3 33 -11 41 -18 31 -26 242 -38 360 -21 77 11 224 85 285 143 72 69 115 128 156 213 12 25 28 57 35 72 8 14 14 36 14 48 0 12 5 31 12 43 12 21 20 72 34 221 8 81 -9 192 -39 256 -24 52 -119 150 -146 150 -10 0 -24 6 -30 14 -7 8 -31 16 -54 19 -23 3 -62 10 -87 16 -62 14 -145 12 -205 -4z m323 -136 c40 -14 132 -131 132 -168 0 -15 -5 -32 -12 -39 -9 -9 -8 -16 3 -29 19 -23 16 -160 -4 -180 -22 -22 -50 -5 -42 26 3 14 8 54 10 87 4 47 1 65 -10 74 -9 8 -15 29 -15 56 0 26 -5 46 -14 51 -7 4 -28 29 -45 55 -18 26 -36 50 -42 53 -11 8 -12 25 0 25 4 0 22 -5 39 -11z m-96 -82 c18 -14 45 -41 58 -59 24 -32 25 -38 24 -179 -1 -113 -5 -152 -18 -177 -9 -17 -16 -41 -16 -54 0 -13 -7 -32 -15 -42 -8 -11 -15 -27 -15 -37 0 -9 -7 -22 -15 -29 -8 -7 -15 -20 -15 -30 0 -22 -127 -150 -149 -150 -9 0 -25 -7 -35 -15 -14 -11 -47 -15 -118 -15 -87 0 -103 3 -136 24 -70 44 -107 132 -99 234 5 73 23 170 39 217 6 17 13 42 15 57 3 15 11 33 19 39 8 6 14 17 14 24 0 15 58 103 86 132 26 26 116 80 145 86 13 3 63 4 110 3 75 -3 91 -7 121 -29z m-532 -120 c-15 -12 -44 -82 -60 -145 -4 -18 -13 -39 -19 -46 -6 -7 -16 -63 -22 -125 -15 -165 7 -257 84 -349 21 -24 37 -48 37 -52 0 -14 -24 -18 -45 -7 -24 12 -95 84 -95 96 0 5 -7 14 -15 21 -9 7 -13 21 -10 31 3 9 2 20 -2 22 -15 10 -14 175 2 275 11 68 21 102 34 112 10 9 26 42 36 75 22 70 64 130 80 114 7 -7 5 -14 -5 -22z m750 -263 c0 -14 -12 -19 -23 -8 -9 9 4 35 14 28 5 -3 9 -12 9 -20z m-48 -94 c3 -22 1 -27 -7 -20 -7 5 -15 7 -18 3 -4 -3 -10 2 -13 12 -4 10 -1 21 7 26 22 14 26 11 31 -21z m-14 -83 c4 -21 -27 -35 -38 -17 -12 19 0 42 19 38 9 -2 17 -11 19 -21z"></path> <path d="M1800 4415 c0 -8 5 -15 10 -15 6 0 10 7 10 15 0 8 -4 15 -10 15 -5 0 -10 -7 -10 -15z"></path> <path d="M1195 3615 c-5 -2 -45 -9 -88 -16 -131 -22 -117 146 -117 -1376 0 -950 3 -1327 11 -1361 14 -56 31 -78 81 -103 35 -18 70 -19 728 -19 791 0 716 -10 741 101 18 81 18 206 0 284 -25 104 21 96 -509 95 l-464 -2 1 1164 1 1163 -22 21 c-29 26 -176 54 -278 53 -41 0 -79 -2 -85 -4z m256 -134 l39 -39 0 -1055 c0 -732 3 -1072 11 -1109 11 -53 48 -105 94 -131 14 -8 142 -14 422 -17 478 -6 442 4 450 -131 5 -82 4 -85 -27 -126 l-32 -43 -551 -2 c-626 -1 -663 0 -697 15 -13 7 -35 27 -47 46 l-23 34 0 1268 0 1268 37 30 c37 31 38 31 161 31 l124 0 39 -39z"></path>
-                      <circle cx="12" cy="13" r="14"/>
-                    </svg> -->
-                    <!-- <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  width="30.000000pt" height="30.000000pt" viewBox="0 0 200.000000 200.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,200.000000) scale(0.050000,-0.050000)" fill="#ffffff" stroke="#ffffff"> <path d="M3340 3399 c-38 -9 -89 -12 -113 -6 -85 21 -349 -194 -429 -348 -15 -30 -44 -67 -63 -81 -19 -15 -35 -35 -35 -46 0 -10 -22 -52 -48 -93 -113 -176 -135 -464 -43 -556 97 -97 356 -65 484 59 24 23 82 78 129 121 289 271 478 696 388 872 -28 53 -51 65 -170 89 -16 3 -61 -2 -100 -11z m85 -208 c-18 -270 -636 -996 -694 -814 -15 48 57 281 135 433 56 109 62 116 73 70 17 -68 109 -81 141 -19 13 24 19 61 13 83 -30 117 173 343 297 330 34 -3 39 -17 35 -83z"></path> <path d="M1998 2910 c-67 -36 -188 -186 -205 -253 -8 -33 -25 -52 -47 -50 -23 2 -50 -31 -82 -96 -26 -54 -65 -121 -86 -148 -21 -26 -38 -70 -38 -96 0 -27 -14 -54 -32 -61 -23 -8 -29 -28 -20 -70 7 -36 4 -53 -8 -46 -34 21 -65 -10 -40 -40 17 -21 6 -32 -50 -50 -47 -16 -69 -33 -62 -51 6 -16 0 -23 -16 -17 -15 6 -32 -3 -38 -19 -6 -16 -38 -35 -72 -42 -33 -8 -83 -32 -110 -53 -41 -33 -59 -36 -93 -18 -157 84 -371 -122 -290 -279 51 -98 185 -107 272 -20 22 22 39 29 39 17 0 -16 8 -16 25 -3 14 11 49 25 79 32 l55 13 -41 -95 c-22 -52 -65 -126 -94 -165 -85 -110 -142 -197 -175 -266 -71 -149 -91 -174 -139 -174 -33 0 -59 -18 -79 -55 -16 -30 -30 -44 -30 -30 -1 35 -85 31 -175 -8 -320 -138 -370 -181 -327 -285 32 -77 120 -157 181 -165 28 -4 55 -14 61 -22 42 -56 363 -25 445 43 19 16 54 31 76 33 22 1 67 33 99 71 33 37 76 86 97 108 20 22 52 64 70 92 26 41 55 56 138 67 126 17 170 25 229 42 28 9 45 5 45 -9 0 -14 37 -21 100 -19 57 2 100 13 100 25 1 16 5 16 15 0 22 -32 97 -68 143 -68 22 0 79 -19 126 -42 91 -44 111 -55 206 -119 178 -119 310 -44 310 177 0 82 -62 164 -124 164 -18 0 -36 12 -42 26 -15 40 -128 64 -299 64 -104 0 -155 8 -155 23 0 34 -225 45 -246 12 -13 -21 -23 -21 -52 0 -54 37 -262 21 -262 -20 0 -47 -13 -23 -27 50 -9 48 -5 65 16 65 46 0 232 388 400 838 15 39 50 81 83 97 82 42 231 189 219 218 -5 15 12 27 43 31 40 4 59 23 77 76 14 41 35 68 52 65 36 -6 107 292 88 368 -35 139 -202 208 -333 137z m128 -287 c-3 -79 -121 -273 -166 -273 -9 0 -24 -8 -33 -18 -10 -11 -7 -12 8 -4 14 8 25 5 25 -7 0 -11 -8 -21 -18 -21 -10 0 -70 -42 -133 -93 l-115 -94 15 79 c16 84 143 306 185 322 14 6 26 21 27 33 1 50 147 177 189 165 11 -4 18 -43 16 -89z m-567 -767 c-10 -35 -27 -72 -37 -82 -10 -10 -14 -31 -8 -47 6 -15 1 -39 -10 -52 -11 -14 -57 -99 -103 -190 -46 -91 -92 -161 -102 -154 -10 6 -14 -2 -7 -18 6 -16 -12 -75 -41 -130 -52 -104 -64 -172 -33 -192 69 -42 -120 -260 -204 -235 -10 3 -12 -3 -6 -12 17 -28 -171 -199 -268 -243 -96 -43 -200 -54 -200 -21 0 11 -13 20 -30 20 -16 0 -30 10 -30 21 0 12 8 16 18 10 9 -6 16 5 15 24 -2 19 8 33 22 30 14 -3 25 5 25 16 0 13 17 16 40 9 22 -7 40 -5 40 4 0 9 23 26 50 39 35 16 46 17 36 1 -7 -12 36 18 97 67 104 85 171 177 389 534 46 74 79 142 74 150 -4 8 7 9 26 1 26 -10 30 -6 17 16 -10 15 -20 45 -24 65 -3 21 -23 63 -45 93 -22 31 -40 66 -40 77 0 23 207 163 240 163 11 0 20 14 20 31 0 17 8 26 18 20 9 -6 29 3 42 19 36 43 39 38 19 -34z"></path> </g> </svg> -->
-                    <!-- <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  width="35.000000pt" height="35.000000pt" viewBox="0 0 200.000000 200.000000"  preserveAspectRatio="xMidYMid meet" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2">
-                      <g transform="translate(0.000000,200.000000) scale(0.050000,-0.050000)" fill="#ffffff" stroke="none" >
-                        <path d="M2391 3938 c-66 -16 -291 -210 -291 -251 0 -4 -17 -46 -37 -92 -57 -128 -90 -249 -77 -281 6 -16 -1 -47 -16 -68 -34 -48 -57 -433 -25 -413 14 9 17 -14 10 -70 -8 -62 -4 -83 16 -83 15 0 46 -20 69 -45 72 -78 160 -96 230 -49 73 49 250 217 250 237 0 8 27 44 60 80 33 36 60 77 60 91 0 14 25 41 55 61 30 19 70 51 90 70 19 19 46 35 59 35 13 0 7 13 -14 28 -29 21 -33 34 -17 55 54 67 22 265 -48 297 -40 18 -70 49 -77 80 -7 28 -29 91 -50 140 -88 208 -97 214 -247 178z m0 -383 c3 -19 13 -46 21 -59 38 -61 33 -332 -7 -344 -21 -7 -64 -40 -96 -74 l-59 -62 85 14 c101 16 110 -8 38 -106 -123 -166 -204 -207 -247 -124 -30 59 -34 160 -6 160 11 0 20 9 20 20 0 11 -14 20 -31 20 -18 0 -25 10 -17 22 7 13 15 51 18 85 7 101 33 213 50 213 15 0 35 49 52 126 11 51 67 157 105 200 33 38 52 15 74 -91z"></path> <path d="M1384 2465 c-72 -6 -83 -12 -64 -35 19 -23 10 -34 -43 -57 -99 -42 -237 -149 -237 -183 0 -17 -9 -30 -20 -30 -11 0 -20 -17 -20 -39 0 -21 -14 -53 -32 -70 -18 -18 -28 -49 -23 -70 6 -20 3 -47 -5 -61 -8 -13 -8 -55 0 -92 13 -54 10 -68 -15 -68 -24 0 -28 -16 -18 -78 18 -113 -3 -196 -54 -210 -41 -10 -41 -12 -5 -38 26 -19 32 -37 21 -56 -10 -15 -15 -50 -11 -77 13 -101 -20 -301 -50 -301 -20 0 -28 -25 -28 -83 0 -46 -15 -132 -34 -192 l-34 -108 -71 13 c-39 7 -90 25 -113 40 -58 37 -219 17 -186 -23 18 -21 14 -27 -21 -27 -60 0 -121 -35 -121 -71 0 -18 -19 -29 -50 -29 -48 0 -50 -4 -38 -85 20 -129 107 -195 259 -195 95 0 126 -17 114 -61 -8 -33 1 -39 63 -39 40 0 72 10 72 23 0 16 46 18 158 8 212 -18 508 -15 641 7 73 11 125 10 157 -4 35 -16 51 -16 62 3 8 13 30 19 49 12 22 -9 33 -3 33 18 0 25 10 28 46 15 25 -10 59 -11 76 -1 16 9 65 20 109 25 107 12 239 75 290 141 23 29 55 53 71 53 29 0 149 169 147 209 -1 30 -173 131 -222 131 -60 0 -275 -119 -349 -194 -57 -57 -77 -64 -181 -64 -437 -3 -526 0 -537 18 -7 11 -46 20 -88 20 -89 0 -111 16 -77 55 27 34 74 151 88 225 6 28 18 68 27 90 34 82 104 427 140 690 40 285 126 480 196 442 21 -11 44 -15 51 -8 7 7 13 -3 13 -21 0 -64 139 -183 182 -156 32 20 39 16 50 -27 17 -68 39 -63 61 15 10 36 45 82 78 104 187 124 199 235 33 305 -64 27 -68 32 -35 51 62 34 -255 162 -378 152 -23 -2 -80 -7 -127 -12z m183 -210 c8 -19 14 -19 29 2 40 58 221 -65 194 -132 -9 -22 -18 -26 -24 -11 -5 13 -21 19 -37 13 -16 -6 -24 -19 -18 -29 24 -38 -33 -15 -95 39 -36 31 -87 68 -112 81 -25 13 -40 33 -33 43 17 28 84 23 96 -6z m-641 -1801 c-7 -11 -3 -14 9 -7 20 12 125 -57 125 -84 0 -7 -88 -14 -195 -15 -127 -2 -171 3 -125 12 68 14 67 15 -26 17 -54 2 -91 -5 -85 -15 6 -10 -9 -16 -34 -13 -64 9 -115 32 -115 53 0 10 -18 18 -40 18 -23 0 -40 13 -40 31 0 17 9 26 20 19 11 -7 20 -4 20 7 0 25 147 -8 156 -36 11 -32 44 -25 44 9 0 23 11 25 49 10 41 -15 47 -13 37 14 -8 21 -3 28 15 22 14 -4 44 9 65 30 41 41 150 -24 120 -72z"></path> </g> </svg> -->
+        <div class="top-menu top-menu-dark bkgd-dark box-shadow">
+            <div class="container elastic justify-content-between">
+                <a href="/" class="top-menu-logo elastic align-items-center">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="50.000000pt" height="50.000000pt" viewBox="0 0 600.000000 600.000000">
                         <g transform="translate(0.000000,600.000000) scale(0.100000,-0.100000)" fill="#ffffff" stroke="none">
                             <path d="M3522 5823 c-12 -26 -8 -191 6 -205 8 -8 17 -7 36 6 24 15 26 22 26 100 0 68 -3 86 -18 99 -24 22 -39 21 -50 0z"></path>
@@ -84,18 +70,18 @@
                     </svg>
                     <strong>List-O-Rama</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="top-menu-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="top-menu-toggler-icon"></span>
                 </button>
             </div>
         </div>
     </header>
 
     <main role="main">
-        @RenderBody()
+    @RenderBody()
     </main>
 
-    <footer class="text-muted">
+    <footer class="text-semi">
         <div class="container">
             <p class="float-right">
                 <a href="#">Back to top</a>
@@ -111,5 +97,17 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script>
+        $(".top-menu-toggler").click(function () {
+            if ($('#navbarHeader').hasClass('collapse')) {
+                $("#navbarHeader").removeClass('collapse');
+                $("#navbarHeader").addClass('expand');
+            }
+            else if ($('#navbarHeader').hasClass('expand')) {
+                $("#navbarHeader").removeClass('expand');
+                $("#navbarHeader").addClass('collapse');
+            }
+        });
+    </script>
 </body>
 </html>

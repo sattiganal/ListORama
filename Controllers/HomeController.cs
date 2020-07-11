@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ListORama.Models;
+using ListORama.DataAccess;
 
 namespace ListORama.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        private ApplicationDBContext dbContext;
 
         public HomeController(ILogger<HomeController> logger)
         {
