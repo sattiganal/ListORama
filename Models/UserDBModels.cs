@@ -14,5 +14,10 @@ namespace ListORama.Models
         public string firstName { get; set; }
         public string lastName { get; set; }
         public int password { get; set; }
+        public String address1 { get; set; }
+        public String address2 { get; set; }
+        public String city { get; set; }
+        public String state { get; set; }
+        public String zip { get; set; }
     }
 }

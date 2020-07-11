@@ -22,31 +22,27 @@ namespace ListORama.Controllers
             return View();
         }
 
-        public async Task<ViewResult> SignUp(
-            String inputEmail,
-            String inputPassword,
-            String inputFirstName,
-            String inputLastName,
-            String inputAddress1,
-            String inputAddress2,
-            String inputCity,
-            String inputState,
-            String inputZip)
+        public async Task<ViewResult> SignUp(User user)
         {
             User userCreated = null;
-            if (!String.IsNullOrWhiteSpace(inputEmail))
+            if (user != null && !String.IsNullOrWhiteSpace(user.email))
             {
                 User newUser = new User();
-                newUser.email = inputEmail;
-                newUser.firstName = inputFirstName;
-                newUser.lastName = inputLastName;
-                newUser.password = inputPassword.GetHashCode();
+                newUser.email = user.email;
+                newUser.firstName = user.firstName;
+                newUser.lastName = user.lastName;
+                newUser.password = user.password.GetHashCode();
+                newUser.address1 = user.address1;
+                newUser.address2 = user.address2;
+                newUser.city = user.city;
+                newUser.state = user.state;
+                newUser.zip = user.zip;
                 dbContext.users.Add(newUser);
                 dbContext.SaveChanges();
 
                 // READ operation
                 userCreated = dbContext.users
-                                        .Where(c => c.email == inputEmail)
+                                        .Where(c => c.email == user.email)
                                         .First();
             }
             return View(userCreated);
