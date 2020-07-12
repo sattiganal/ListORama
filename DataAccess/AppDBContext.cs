@@ -11,5 +11,8 @@ namespace ListORama.DataAccess
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
         public DbSet<User> users { get; set; }
+        public DbSet<UserGroup> groups { get; set; }
+
+        public DbSet<UserGroupMember> groupMemberships { get; set; }
     }
 }

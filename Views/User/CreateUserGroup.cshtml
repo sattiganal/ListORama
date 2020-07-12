@@ -1,0 +1,28 @@
+﻿@model UserGroup
+@{
+    ViewData["Title"] = "CreateUserGroup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>User Group Creation</h1>
+<h2>A user can be part of multiple groups and a group can have multiple users.</h2>
+@{ 
+        <div>
+            <p>User Group : @Model.groupName</p>
+            <p>Group Status : @Model.groupStatus</p>
+            <p>Group Members are</p>
+            <ul>
+                @foreach (UserGroupMember member in @Model.groupMembers)
+                {
+                        <li>
+                            @member.user.firstName &nbsp; @member.user.lastName 
+                            @if (@Model.groupOwner.userID == member.user.userID)
+                            {
+                                                <span>&nbsp;(Group Owner)</span>
+                            }
+                        </li>
+                }
+            </ul>
+        </div>
+}
+
