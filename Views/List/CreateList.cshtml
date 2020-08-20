@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "CreateList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ShoppingList
+
+<!--
+<h2>
+    @ViewBag.Message
+</h2>
+-->
+
+    <form class="form-signin py-5 justify-content-md-center" asp-controller="List" asp-action="CreateList" method="post">
+        <br />
+        <br />
+        <br />
+        <br />
+        <h1 class="h3 mb-3 font-weight-normal text-center">Create a New List</h1>
+        <div class="row py-2">
+            <label for="listName" class="sr-only">List Name</label>
+            <input asp-for="listName" type="text" id="listName" class="form-control" placeholder="List Name" required autofocus>
+        </div>
+        <div class="row py-2">
+            <table id="listItemsTab">
+                <tr>
+                    <td><input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item 1" /></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>
+                    </td>
+                </tr>
+            </table>
+            <!--
+        <a href="#" title="" class="addItem" onclick="addItem(x)">Add Item</a>
+        -->
+        </div>
+        <div>
+            <button class="lstbtn" type="button" onclick="addItem()">Add Item</button>
+        </div>
+        <br />
+        <div>
+            <button class="btn btn-primary btn-block" type="submit">Save List</button>
+        </div>
+    </form>
+
+

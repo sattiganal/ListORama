@@ -14,5 +14,7 @@ namespace ListORama.DataAccess
         public DbSet<UserGroup> groups { get; set; }
 
         public DbSet<UserGroupMember> groupMemberships { get; set; }
+
+        public DbSet<ShoppingList> shoppingList { get; set; }
     }
 }

@@ -78,7 +78,7 @@
     </header>
 
     <main role="main">
-    @RenderBody()
+        @RenderBody()
     </main>
 
     <footer class="text-semi">
@@ -109,5 +109,33 @@
             }
         });
     </script>
+    <script>
+        function addItem() {
+            var tab = document.getElementById('listItemsTab');
+        
+            var lastRow = 0;
+
+            var lastRowId = $('#listItemsTab tr:last td:last input').attr('id');
+            
+            var row = tab.insertRow();
+            var cell = row.insertCell(0);
+            console.log('LAST ROW ID : ' + lastRowId);
+            console.log('LAST ROW : ' + lastRow);
+            cntr = lastRow;
+            cntr++;
+            
+            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item 1" name="listItems" />';
+            cell = row.insertCell(1);
+            cell.innerHTML = '<button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>';
+
+        };        
+        function delItem(row) {
+            row.closest('tr').remove();
+        };
+                  
+        
+    </script>
+    
+
 </body>
 </html>
