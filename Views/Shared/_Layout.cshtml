@@ -124,7 +124,7 @@
             cntr = lastRow;
             cntr++;
             
-            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item 1" name="listItems" />';
+            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item"' + lastRow + ' name="listItems" />';
             cell = row.insertCell(1);
             cell.innerHTML = '<button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>';
 

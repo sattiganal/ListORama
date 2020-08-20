@@ -6,6 +6,7 @@ using ListORama.DataAccess;
 using ListORama.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace ListORama.Controllers
 {
@@ -27,9 +28,19 @@ namespace ListORama.Controllers
 //            [HttpPost]
             if (shoppingList != null && !String.IsNullOrWhiteSpace(shoppingList.listName))
             {
+                try
+                {
+                    shoppingList.listID = dbContext.shoppingList
+                                       .Max(c => c.listID);
+                }
 
-                shoppingList.listID = dbContext.shoppingList
-                                        .Max(c => c.listID);
+                catch (Exception ex)
+                {
+                    shoppingList.listID = 0;
+                }
+                
+               
+
                 shoppingList.listID = shoppingList.listID + 1;
 
                 shoppingList.listStatus = "Open";
