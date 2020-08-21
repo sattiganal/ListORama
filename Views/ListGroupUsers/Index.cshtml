@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ListORama.Models.ListGroupUser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $("#groupID").change(function () {
+
+            var t = $(this).val();
+            //alert(t);
+            $("#tblUsers").load("/ListGroupUsers/GroupChanged?val=" + t);
+            
+        });
+    });
+
+</script>
+
+<h1>Groups and Users</h1>
+
+<p>
+    <a asp-action="Create">Add User to a Group</a>
+</p>
+<p>Select a group to view the list of users</p>
+<div class="col-md-4" style="padding-left: 0px">
+    @Html.DropDownList("selectedGroupID", ViewData["GroupDataVD"] as SelectList, htmlAttributes: new { @class = "form-control", id = "groupID" })
+</div>
+    <partial name="UserGridPV" model="ViewBag.GroupData" />
+
+
