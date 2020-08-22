@@ -73,7 +73,8 @@ namespace ListORama.Controllers
                         currentUserUserId = u.userID;
                         //TempData["currentUserUserId"] = currentUserUserId;
                         return RedirectToAction("Index", "ListGroups");
-                        
+                        //return RedirectToAction("Dashboard", "User");
+
 
 
                     }
