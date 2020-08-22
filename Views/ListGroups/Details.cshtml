@@ -4,21 +4,22 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <main role="main" class="container">
+        <h1>Group Details</h1>
 
-<h1>Group Details</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            &nbsp;&nbsp;&nbsp;&nbsp;Group Name
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.listGroupName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.listGroupID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    &nbsp;&nbsp;&nbsp;&nbsp;Group Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.listGroupName)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.listGroupID">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </main>
