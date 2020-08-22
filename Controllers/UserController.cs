@@ -89,6 +89,11 @@ namespace ListORama.Controllers
 
         public IActionResult Dashboard()
         {
+            String loggedInUser = Convert.ToString(TempData.Peek("currentUserUserId"));
+            if(String.IsNullOrWhiteSpace(loggedInUser) || loggedInUser.Equals("0"))
+            {
+                return RedirectToAction("Login", "User");
+            }
             return View();
         }
 
