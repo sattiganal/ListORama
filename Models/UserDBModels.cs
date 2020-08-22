@@ -15,7 +15,9 @@ namespace ListORama.Models
         public string email { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public int password { get; set; }
+        public byte[] password { get; set; }
+        public String pswdString { get; set; }
+        public byte[] salt { get; set; }
         public string fullName
         {
             get
@@ -49,4 +51,11 @@ namespace ListORama.Models
        public UserGroup group { get; set; }
     }
 
+    public class UserCred
+    {
+        [Key]
+        public int userCredId { get; set; }
+        public String userName { get; set; }
+        public String password { get; set; }
+    }
 }

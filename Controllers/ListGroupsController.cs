@@ -47,9 +47,8 @@ namespace ListORama.Controllers
         // GET: ListGroups/Create
         public IActionResult Create()
         {
-            TempData["UserID"] = 1;
-            userID = Convert.ToInt16(@TempData["UserID"]);
-            TempData["UserID"] = userID;
+            
+            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
             ListGroup newListGroup = new ListGroup();
             newListGroup.listGroupName = "";
             newListGroup.listGroupID = 0;

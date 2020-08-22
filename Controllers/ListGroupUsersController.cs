@@ -23,9 +23,7 @@ namespace ListORama.Controllers
         // GET: ListGroupUsers
         public async Task<IActionResult> Index()
         {
-            userID = Convert.ToInt16(@TempData["UserID"]);
-            userID = 1;
-            TempData["UserID"] = userID;
+            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
             var dropdownVD1 = new SelectList(_context.listgroups.Where(x => x.userID == userID).OrderBy(x => x.listGroupName).ToList(), "listGroupID", "listGroupName");
             ViewData["GroupDataVD"] = dropdownVD1;
             selectedGroupID = Convert.ToInt32(dropdownVD1.Select(x => x.Value).First());

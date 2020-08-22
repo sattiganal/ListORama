@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace ListORama
 {
@@ -20,6 +21,11 @@ namespace ListORama
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(so => 
+            {
+                so.IdleTimeout = TimeSpan.FromSeconds(60);
+            });
+
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(Configuration["Data:Listorama:ConnectionString"]));
 
             services.AddControllersWithViews();
@@ -46,7 +52,7 @@ namespace ListORama
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
