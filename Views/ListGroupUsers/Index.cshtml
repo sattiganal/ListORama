@@ -11,9 +11,9 @@
         $("#groupID").change(function () {
 
             var t = $(this).val();
-            //alert(t);
+            alert(t);
             $("#tblUsers").load("/ListGroupUsers/GroupChanged?val=" + t);
-            
+            alert("r");
         });
     });
 

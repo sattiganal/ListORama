@@ -26,7 +26,7 @@ namespace ListORama.Controllers
             userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
             var dropdownVD1 = new SelectList(_context.listgroups.Where(x => x.userID == userID).OrderBy(x => x.listGroupName).ToList(), "listGroupID", "listGroupName");
             ViewData["GroupDataVD"] = dropdownVD1;
-            selectedGroupID = Convert.ToInt32(dropdownVD1.Select(x => x.Value).First());
+            selectedGroupID = Convert.ToInt32(dropdownVD1.Select(x => x.Value).FirstOrDefault());
             loadGroups(selectedGroupID);
             return View(await _context.listgroupusers.ToListAsync());
         }
@@ -80,8 +80,10 @@ namespace ListORama.Controllers
         public IActionResult Create()
         {
             //using viewdata 
-            userID = Convert.ToInt16(@TempData["UserID"]);
-            TempData["UserID"] = userID;
+            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
+            //userID = 1;
+            //userID = Convert.ToInt16(@TempData["UserID"]);
+            //TempData["UserID"] = userID;
             var dropdownVD = new SelectList(_context.users.ToList(), "userID", "fullName");
             ViewData["StudDataVD"] = dropdownVD;
             var dropdownVD1 = new SelectList(_context.listgroups.Where(x => x.userID == userID).ToList(), "listGroupID", "listGroupName");

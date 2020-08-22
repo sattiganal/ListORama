@@ -22,8 +22,18 @@ namespace ListORama.Controllers
 
         // GET: ListGroups1
         public async Task<IActionResult> Index()
-        {
-            return View(await _context.listgroups.ToListAsync());
+        {            
+            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
+            var list1 = (from g in _context.listgroups
+                         where g.userID == userID
+                         select new ListGroup
+                         {
+                             listGroupID = g.listGroupID,
+                             listGroupName = g.listGroupName,
+                             userID = g.userID
+                         }).ToList();
+            return View(list1);
+            //return View(await _context.listgroups.ToListAsync());
         }
 
         // GET: ListGroups/Details/5
@@ -48,7 +58,7 @@ namespace ListORama.Controllers
         public IActionResult Create()
         {
             
-            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
+            userID = Convert.ToInt16(TempData.Peek("currentUserUserId"));
             ListGroup newListGroup = new ListGroup();
             newListGroup.listGroupName = "";
             newListGroup.listGroupID = 0;

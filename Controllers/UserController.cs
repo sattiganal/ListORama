@@ -71,9 +71,13 @@ namespace ListORama.Controllers
                     {
                         //HttpContext.Session.SetString("currentUser", JsonConvert.SerializeObject(u));
                         currentUserUserId = u.userID;
-                        return RedirectToAction("Dashboard", "User");
+                        //TempData["currentUserUserId"] = currentUserUserId;
+                        return RedirectToAction("Index", "ListGroups");
+                        
+
+
                     }
-                    
+
                 }
 
                 ViewBag.message = "Invalid Username/Password.";
