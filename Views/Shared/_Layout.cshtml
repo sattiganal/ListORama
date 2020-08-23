@@ -135,7 +135,7 @@
             
             
             //            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item"' + lastRow + ' name="listItems" />';
-            cell.innerHTML = '<input asp-for="ItemsList[' + cntr + '].listItems" type="text" id="listItems' + cntr + '" class="form-control" placeholder="Item ' + lastRow + '" />';
+            cell.innerHTML = '<input name="ItemsList[' + cntr + '].listItems" type="text" id="listItems' + cntr + '" class="form-control" placeholder="Item ' + lastRow + '" />';
 
             cell = row.insertCell(1);
 //            cell.innerHTML = '<button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>';

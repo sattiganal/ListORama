@@ -18,6 +18,14 @@ namespace ListORama.DataAccess
 
         public DbSet<ShoppingList> shoppingList { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ShoppingList>()
+                .HasKey(o => new { o.listID, o.listItems });
+        }
+
+
+
         public DbSet<ListGroup> listgroups { get; set; }
         public DbSet<ListGroupUser> listgroupusers { get; set; }
     }

@@ -32,42 +32,54 @@ namespace ListORama.Controllers
         public IActionResult CreateList(ItemList ListObjs)
         {
             ShoppingList shoppingListCreated = null;
-            
-
-/*            
-
-            if (shoppingList != null && !String.IsNullOrWhiteSpace(shoppingList.listName))
+            ItemList items = ListObjs;
+            string sListName = " ";
+            int maxShoppingListId = 0;
+            int i = 0;
+            foreach (var item in ListObjs.ItemsList)
             {
-                try
+                shoppingListCreated = item;
+                i++;
+                if (i == 1)
+                    sListName = shoppingListCreated.listName;
+                else
+                    shoppingListCreated.listName = sListName;
+
+
+                if (shoppingListCreated != null && !String.IsNullOrWhiteSpace(shoppingListCreated.listName))
                 {
-                    shoppingList.listID = dbContext.shoppingList
-                                       .Max(c => c.listID);
+                    if (i == 1)
+                    {
+                        try
+                        {
+                          maxShoppingListId =  shoppingListCreated.listID = dbContext.shoppingList
+                                               .Max(c => c.listID);
+                        }
+
+                        catch (Exception ex)
+                        {
+                            shoppingListCreated.listID = 0;
+                        }
+                    }
+
+                                        
+                    shoppingListCreated.listID = maxShoppingListId + 1;
+
+                    shoppingListCreated.listStatus = "Open";
+
+
+                    dbContext.shoppingList.Add(shoppingListCreated);
+                    dbContext.SaveChanges();
+
+                    // READ operation
+                    shoppingListCreated = dbContext.shoppingList
+                                            .Where(c => c.listName == shoppingListCreated.listName)
+                                            .First();
+
                 }
-
-                catch (Exception ex)
-                {
-                    shoppingList.listID = 0;
-                }
-                
-               
-
-                shoppingList.listID = shoppingList.listID + 1;
-
-                shoppingList.listStatus = "Open";
-
-
-                dbContext.shoppingList.Add(shoppingList);
-                dbContext.SaveChanges();
-
-                // READ operation
-                shoppingListCreated = dbContext.shoppingList
-                                        .Where(c => c.listName == shoppingList.listName)
-                                        .First();
-                                          
             }
-*/
-                        return  View(shoppingListCreated);
-//            return await Task.FromResult<ShoppingList>(shoppingListCreated);
+        
+            return View(items);
         }
 
 
