@@ -112,20 +112,28 @@
     <script>
         function addItem() {
             var tab = document.getElementById('listItemsTab');
-        
-            var lastRow = 0;
+            console.log('tab last row id: ' + tab.lastRowId);
 
-            var lastRowId = $('#listItemsTab tr:last td:last input').attr('id');
             
-            var row = tab.insertRow();
-            var cell = row.insertCell(0);
+            
+            var lastRowId = $('#listItemsTab tr').last().attr('id');
             console.log('LAST ROW ID : ' + lastRowId);
-            console.log('LAST ROW : ' + lastRow);
-            cntr = lastRow;
+                                 
+            cntr = lastRowId;
             cntr++;
+            var lastRow = cntr + 1;
             
-            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item"' + lastRow + ' name="listItems" />';
+
+            var row = tab.insertRow();
+            row.id = cntr;
+            var cell = row.insertCell(0);
+                        
+            
+            
+            //            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item"' + lastRow + ' name="listItems" />';
+            cell.innerHTML = '<input asp-for="ItemsList[' + cntr + '].listItems" type="text" id="listItems' + cntr + '" class="form-control" placeholder="Item ' + lastRow + '" />';
             cell = row.insertCell(1);
+//            cell.innerHTML = '<button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>';
             cell.innerHTML = '<button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>';
 
         };        

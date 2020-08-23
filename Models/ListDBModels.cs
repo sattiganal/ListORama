@@ -33,4 +33,9 @@ namespace ListORama.Models
 //        public String listItem2 { get; set; }
 //        public String listItem3 { get; set; }
     }    
+
+    public class ItemList
+    {
+        public List<ShoppingList> ItemsList { get; set; }
+    }
 }

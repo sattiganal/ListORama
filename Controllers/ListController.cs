@@ -21,11 +21,21 @@ namespace ListORama.Controllers
         }
 
 
+        public IActionResult CreateList ()
+        {
+            return View();
+        }
+
+
         //        public async Task<ViewResult> CreateList(ShoppingList shoppingList)
-        public IActionResult CreateList(ShoppingList shoppingList)
+        [HttpPost]
+        public IActionResult CreateList(ItemList ListObjs)
         {
             ShoppingList shoppingListCreated = null;
-//            [HttpPost]
+            
+
+/*            
+
             if (shoppingList != null && !String.IsNullOrWhiteSpace(shoppingList.listName))
             {
                 try
@@ -55,6 +65,7 @@ namespace ListORama.Controllers
                                         .First();
                                           
             }
+*/
                         return  View(shoppingListCreated);
 //            return await Task.FromResult<ShoppingList>(shoppingListCreated);
         }
