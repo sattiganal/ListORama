@@ -1,0 +1,48 @@
+﻿@model Chart
+@{
+    ViewData["Title"] = "Chart";
+}
+
+<
+<br />
+<br />
+<div class="form-signup py-5 justify-content-between">
+    <h2>This is a Demo chart page to demonstrate charting capability.</h2>
+    <h6>This page uses charts.js and Parks API from NPS to get 20 parks and show a doughnut chart for # of parks by states. Go back to 
+    <a asp-controller="User" asp-action="Dashboard">Dashboard</a></h6>
+    <div style="style=" width: 400px; margin: auto; float:none"">
+        <canvas id="parksByState"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+                var config = {
+                    type: '@Model.chartType',
+                    data: {
+                        datasets: [{
+                            data: [@Model.data],
+                            backgroundColor: [@Html.Raw(@Model.backgroundColors)],
+                            label: 'Dataset 1'
+                        }],
+                        labels: [@Html.Raw(@Model.labels)]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: '@Model.chartTitle'
+                        },
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    }
+                };
+                window.onload = function () {
+                    var ctx = document.getElementById('parksByState').getContext('2d');
+                    window.myDoughnut = new Chart(ctx, config);
+                };
+    </script>
+</div>

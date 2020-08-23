@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using ListORama.DataAccess;
 using ListORama.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ListORama.Controllers
 {
@@ -12,6 +16,8 @@ namespace ListORama.Controllers
     {
         private ApplicationDBContext dbContext;
 
+        [TempData]
+        public int currentUserUserId { get; set; }
         public UserController(ApplicationDBContext context)
         {
             dbContext = context;
@@ -27,11 +33,13 @@ namespace ListORama.Controllers
             User userCreated = null;
             if (user != null && !String.IsNullOrWhiteSpace(user.email))
             {
+                byte[] salt = CreateSalt();
                 User newUser = new User();
                 newUser.email = user.email;
                 newUser.firstName = user.firstName;
                 newUser.lastName = user.lastName;
-                newUser.password = user.password.GetHashCode();
+                newUser.salt = salt;
+                newUser.password = GenerateSaltedHash(Encoding.UTF8.GetBytes(user.pswdString), salt);
                 newUser.address1 = user.address1;
                 newUser.address2 = user.address2;
                 newUser.city = user.city;
@@ -43,9 +51,50 @@ namespace ListORama.Controllers
                 // READ operation
                 userCreated = dbContext.users
                                         .Where(c => c.email == user.email)
-                                        .First();
+                                        .FirstOrDefault();
             }
             return View(userCreated);
+        }
+
+        public IActionResult Login(User user)
+        {
+            if (user != null && !String.IsNullOrWhiteSpace(user.email))
+            {
+                User u = dbContext.users
+                                    .Where(c => c.email == user.email)
+                                    .FirstOrDefault();
+                if (null != u)
+                {
+                    String userPswd = user.pswdString;
+                    byte[] suppliedPswd = GenerateSaltedHash(Encoding.UTF8.GetBytes(userPswd), u.salt);
+                    if(CompareByteArrays(suppliedPswd, u.password))
+                    {
+                        //HttpContext.Session.SetString("currentUser", JsonConvert.SerializeObject(u));
+                        currentUserUserId = u.userID;
+                        //TempData["currentUserUserId"] = currentUserUserId;
+                        return RedirectToAction("Index", "ListGroups");
+                        //return RedirectToAction("Dashboard", "User");
+
+
+
+                    }
+
+                }
+
+                ViewBag.message = "Invalid Username/Password.";
+                    
+            }
+            return View();
+        }
+
+        public IActionResult Dashboard()
+        {
+            String loggedInUser = Convert.ToString(TempData.Peek("currentUserUserId"));
+            if(String.IsNullOrWhiteSpace(loggedInUser) || loggedInUser.Equals("0"))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            return View();
         }
 
         public IActionResult CreateUserGroup()
@@ -152,6 +201,54 @@ namespace ListORama.Controllers
                                     .First();
 
             return View(userGroupActive);
+        }
+
+        static byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
+        {
+            HashAlgorithm algorithm = new SHA256Managed();
+
+            byte[] plainTextWithSaltBytes =
+              new byte[plainText.Length + salt.Length];
+
+            for (int i = 0; i < plainText.Length; i++)
+            {
+                plainTextWithSaltBytes[i] = plainText[i];
+            }
+            for (int i = 0; i < salt.Length; i++)
+            {
+                plainTextWithSaltBytes[plainText.Length + i] = salt[i];
+            }
+
+            return algorithm.ComputeHash(plainTextWithSaltBytes);
+        }
+
+        private static byte[] CreateSalt()
+        {
+            //Generate a cryptographic random number.
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[8];
+            rng.GetBytes(buff);
+
+            // Return a Base64 string representation of the random number.
+            return Encoding.UTF8.GetBytes(Convert.ToBase64String(buff));
+        }
+
+        public static bool CompareByteArrays(byte[] array1, byte[] array2)
+        {
+            if (array1.Length != array2.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < array1.Length; i++)
+            {
+                if (array1[i] != array2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

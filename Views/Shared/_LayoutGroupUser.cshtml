@@ -97,7 +97,6 @@
             </p>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script>
@@ -114,31 +113,20 @@
 
         function addItem() {
             var tab = document.getElementById('listItemsTab');
-            console.log('tab last row id: ' + tab.lastRowId);
 
-         
-            
-            var lastRowId = $('#listItemsTab tr').last().attr('id');
+            var lastRow = 0;
 
-            console.log('LAST ROW ID : ' + lastRowId);
-                                 
-            cntr = lastRowId;
-            cntr++;
-
-            var lastRow = cntr + 1;
-            
+            var lastRowId = $('#listItemsTab tr:last td:last input').attr('id');
 
             var row = tab.insertRow();
-            row.id = cntr;
             var cell = row.insertCell(0);
-                        
-            
-            
-            //            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item"' + lastRow + ' name="listItems" />';
-            cell.innerHTML = '<input asp-for="ItemsList[' + cntr + '].listItems" type="text" id="listItems' + cntr + '" class="form-control" placeholder="Item ' + lastRow + '" />';
+            console.log('LAST ROW ID : ' + lastRowId);
+            console.log('LAST ROW : ' + lastRow);
+            cntr = lastRow;
+            cntr++;
 
+            cell.innerHTML = '<input asp-for="listItems" type="text" id="listItems" class="form-control" placeholder="Item"' + lastRow + ' name="listItems" />';
             cell = row.insertCell(1);
-//            cell.innerHTML = '<button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>';
             cell.innerHTML = '<button type="button" class="btn btn-primary" onclick="delItem($(this));">Delete</button>';
 
         };
