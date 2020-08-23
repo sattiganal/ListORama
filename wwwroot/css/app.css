@@ -1276,3 +1276,6 @@ a.btn.disabled, fieldset:disabled a.btn {
       margin-left: 15px
   }
 }
+.error {
+    color: red;
+}

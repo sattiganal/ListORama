@@ -47,7 +47,9 @@ namespace ListORama.Models
 
     public class MyList
     {
+        public int listId { get; set; }
         public String listName { get; set; }
+        public String description { get; set; }
         public String listType { get; set; }
         public String newItem { get; set; }
         public List<MyListItem> listItems { get; set; }
@@ -58,5 +60,10 @@ namespace ListORama.Models
     public class MyListItem
     {
         public String itemName { get; set; }
+    }
+
+    public class Dashboard
+    {
+        public List<MyList> listsOwned { get; set; }
     }
 }

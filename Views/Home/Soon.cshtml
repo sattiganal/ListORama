@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Coming Soon!!!";
+}
+
+<main role="main" class="container">
+    <div class="my-3 px-2 bkgd-white rounded box-shadow">
+        <h6 class="border-bottom border-gray">Coming Soon!!!</h6>
+        <div class="col-md-9">
+            <span class="text-semi">This functionality is under construction. Will be available soon!!! 
+                <a href="javascript:void(0)" data-toggle="tooltip" title="Go Back" class="goBack">Back to Previous Page</a>
+            </span>
+        </div>
+    </div>
+</main>
+<script>
+    $('.goBack').click(function () {
+        parent.history.back();
+    });
+</script>

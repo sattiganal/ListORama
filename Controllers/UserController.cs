@@ -8,6 +8,7 @@ using ListORama.DataAccess;
 using ListORama.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace ListORama.Controllers
@@ -33,27 +34,42 @@ namespace ListORama.Controllers
             User userCreated = null;
             if (user != null && !String.IsNullOrWhiteSpace(user.email))
             {
-                byte[] salt = CreateSalt();
-                User newUser = new User();
-                newUser.email = user.email;
-                newUser.firstName = user.firstName;
-                newUser.lastName = user.lastName;
-                newUser.salt = salt;
-                newUser.password = GenerateSaltedHash(Encoding.UTF8.GetBytes(user.pswdString), salt);
-                newUser.address1 = user.address1;
-                newUser.address2 = user.address2;
-                newUser.city = user.city;
-                newUser.state = user.state;
-                newUser.zip = user.zip;
-                dbContext.users.Add(newUser);
-                dbContext.SaveChanges();
+                if (!userExists(user.email))
+                {
+                    byte[] salt = CreateSalt();
+                    User newUser = new User();
+                    newUser.email = user.email;
+                    newUser.firstName = user.firstName;
+                    newUser.lastName = user.lastName;
+                    newUser.salt = salt;
+                    newUser.password = GenerateSaltedHash(Encoding.UTF8.GetBytes(user.pswdString), salt);
+                    newUser.address1 = user.address1;
+                    newUser.address2 = user.address2;
+                    newUser.city = user.city;
+                    newUser.state = user.state;
+                    newUser.zip = user.zip;
+                    dbContext.users.Add(newUser);
+                    dbContext.SaveChanges();
 
-                // READ operation
-                userCreated = dbContext.users
-                                        .Where(c => c.email == user.email)
-                                        .FirstOrDefault();
+                    // READ operation
+                    userCreated = dbContext.users
+                                            .Where(c => c.email == user.email)
+                                            .FirstOrDefault();
+                }
+                else
+                {
+                    ViewBag.message = "User with email " + user.email + " aleady exists!!!";
+                }
             }
             return View(userCreated);
+        }
+
+        private Boolean userExists(String userEmail)
+        {
+            User user = dbContext.users
+                                        .Where(c => c.email == userEmail)
+                                        .FirstOrDefault();
+            return !(null == user);
         }
 
         public IActionResult Login(User user)
@@ -88,7 +104,33 @@ namespace ListORama.Controllers
             {
                 return RedirectToAction("Login", "User");
             }
-            return View();
+
+            List<UserListUserMap> userListMap = dbContext.listUserMap
+                                                    .Include(p => p.listId)
+                                                    .Include(p => p.listId.listItems)
+                                                    .Include(p => p.userId)
+                                                    .Where(c => c.userId.userID == loggedInUser.userID).ToList<UserListUserMap>();
+            List<MyList> listsOwnded = new List<MyList>();
+            foreach(UserListUserMap map in userListMap)
+            {
+                UserList list = map.listId;
+                MyList dashBoardList = new MyList();
+                listsOwnded.Add(dashBoardList);
+                dashBoardList.listId = list.listId;
+                dashBoardList.listName = list.listName;
+                dashBoardList.description = list.listDescription;
+                dashBoardList.listType = list.listType;
+                foreach(UserListItem item in list.listItems)
+                {
+                    MyListItem listItem = new MyListItem();
+                    listItem.itemName = item.itemName;
+                }
+
+            }
+
+            Dashboard userDashBoard = new Dashboard();
+            userDashBoard.listsOwned = listsOwnded;
+            return View(userDashBoard);
         }
 
         public IActionResult CreateUserGroup()

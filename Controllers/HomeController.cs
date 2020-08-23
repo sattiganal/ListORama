@@ -55,6 +55,11 @@ namespace ListORama.Controllers
             return View();
         }
 
+        public IActionResult Soon()
+        {
+            return View();
+        }
+
         public IActionResult Chart()
         {
             Parks parks = SearchPark(null);

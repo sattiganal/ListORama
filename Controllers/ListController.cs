@@ -46,6 +46,7 @@ namespace ListORama.Controllers
                     if (null != currentList)
                     {
                         currentList.listName = list.listName;
+                        currentList.description = list.description;
                         list = currentList;
                     }
                     if (null == list.listItems)
@@ -60,6 +61,7 @@ namespace ListORama.Controllers
                     if (null != currentList)
                     {
                         currentList.listName = list.listName;
+                        currentList.description = list.description;
                         list = currentList;
                     }
                     MyListItem itemToRemove = null;
@@ -93,6 +95,7 @@ namespace ListORama.Controllers
             List<UserListItem> itemsToSave = new List<UserListItem>();
 
             listToSave.listName = currentList.listName;
+            listToSave.listDescription = currentList.description;
             listToSave.listType = "SHOPPING";
             listToSave.listItems = itemsToSave;
             foreach(MyListItem listeItem in currentList.listItems)

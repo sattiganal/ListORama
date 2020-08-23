@@ -6,76 +6,87 @@
 @{
     if (Model == null)
     {
-        <form class="form-signup py-5 justify-content-between" asp-controller="User" asp-action="SignUp" method="post">
-            <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
-            <div class="row py-2">
-                <div class="col-md-5 px-2">
-                    <label for="inputEmail" class="text-semi">Email address *</label>
-                    <input type="email" name="email" class="form-control" placeholder="jondoe@something.com" required autofocus>
-                </div>
-                <div class="col-md-5 px-2">
-                    <label for="inputPassword" class="text-semi">Password *</label>
-                    <input type="password" name="pswdString" class="form-control" placeholder="Password" required>
-                </div>
+    <form class="form-signup py-5 justify-content-between" asp-controller="User" asp-action="SignUp" method="post">
+        <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
+        @if (!String.IsNullOrWhiteSpace(ViewBag.message))
+        {
+        <div class="error">
+            <h6 class="h6 mb-3 font-weight-normal text-center">
+                @ViewBag.message
+            </h6>
+            <div class="col-md-10 text-semi text-center">
+                Already a member? <a asp-controller="User" asp-action="Login" class="btn btn-primary my-2 justify-content-between">Login</a>
             </div>
+        </div>
+        }
+        <div class="row py-2">
+            <div class="col-md-5 px-2">
+                <label for="inputEmail" class="text-semi">Email address *</label>
+                <input type="email" name="email" class="form-control" placeholder="jondoe@something.com" required autofocus>
+            </div>
+            <div class="col-md-5 px-2">
+                <label for="inputPassword" class="text-semi">Password *</label>
+                <input type="password" name="pswdString" class="form-control" placeholder="Password" required>
+            </div>
+        </div>
 
-            <div class="row py-2">
-                <div class="col-md-5 px-2">
-                    <label for="inputFirstName" class="text-semi">First Name *</label>
-                    <input type="text" name="firstName" class="form-control" placeholder="Jon" required>
-                </div>
-                <div class="col-md-5 px-2">
-                    <label for="inputLastName" class="text-semi">Last Name *</label>
-                    <input type="text" name="lastName" class="form-control" placeholder="Doe" required>
-                </div>
+        <div class="row py-2">
+            <div class="col-md-5 px-2">
+                <label for="inputFirstName" class="text-semi">First Name *</label>
+                <input type="text" name="firstName" class="form-control" placeholder="Jon" required>
             </div>
+            <div class="col-md-5 px-2">
+                <label for="inputLastName" class="text-semi">Last Name *</label>
+                <input type="text" name="lastName" class="form-control" placeholder="Doe" required>
+            </div>
+        </div>
 
-            <div class="row py-2">
-                <div class="col-md-5 px-2">
-                    <label for="inputAddress1" class="text-semi">Address Line 1</label>
-                    <input type="text" name="address1" class="form-control" placeholder="Street Address">
-                </div>
-                <div class="col-md-5 px-2">
-                    <label for="inputAddress2" class="text-semi">Address Line 2</label>
-                    <input type="text" name="address2" class="form-control" placeholder="Apt, Suite etc.">
-                </div>
+        <div class="row py-2">
+            <div class="col-md-5 px-2">
+                <label for="inputAddress1" class="text-semi">Address Line 1</label>
+                <input type="text" name="address1" class="form-control" placeholder="Street Address">
             </div>
+            <div class="col-md-5 px-2">
+                <label for="inputAddress2" class="text-semi">Address Line 2</label>
+                <input type="text" name="address2" class="form-control" placeholder="Apt, Suite etc.">
+            </div>
+        </div>
 
-            <div class="row py-2">
-                <div class="col-md-2 px-2">
-                    <label for="inputCity" class="text-semi">City</label>
-                    <input type="text" name="city" class="form-control" placeholder="Tampa">
-                </div>
-                <div class="col-md-1 px-2">
-                    <label for="inputState" class="text-semi">State</label>
-                    <input type="text" name="state" class="form-control" placeholder="FL">
-                </div>
-                <div class="col-md-2 px-2">
-                    <label for="inputZip" class="text-semi">Zip</label>
-                    <input type="text" name="zip" class="form-control" placeholder="12345">
-                </div>
+        <div class="row py-2">
+            <div class="col-md-5 px-2">
+                <label for="inputCity" class="text-semi">City</label>
+                <input type="text" name="city" class="form-control" placeholder="Tampa">
             </div>
-            <br />
-            <div class="row">
-                <div class="checkbox mb-3 px-2">
-                    <label class="text-semi">
-                        <input type="checkbox" value="TnC"> I've read and agree to <a href="#">ListORama's terms and conditions</a>
-                    </label>
-                </div>
-                <div class="col-md-4 px-2">
-                    <button class="btn btn-sm btn-primary btn-block" type="submit">Sign me up</button>
-                </div>
+            <div class="col-md-1 px-2">
+                <label for="inputState" class="text-semi">State</label>
+                <input type="text" name="state" class="form-control" placeholder="FL">
             </div>
+            <div class="col-md-1 px-2">
+                <label for="inputZip" class="text-semi">Zip</label>
+                <input type="text" name="zip" class="form-control" placeholder="12345">
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="checkbox mb-3 px-2" re>
+                <label class="text-semi">
+                    <input required type="checkbox" value="TnC"> I've read and agree to <a asp-controller="Home" asp-action="Soon">ListORama's terms and conditions</a>
+                </label>
+            </div>
+            <div class="col-md-4 px-2">
+                <button class="btn btn-sm btn-primary btn-block" type="submit">Sign me up</button>
+            </div>
+        </div>
 
-        </form>
+    </form>
     }
     else
     {
         <div class="">
             <h1 class="h3 mb-3 font-weight-normal text-center">
                 Signup Successful... Please proceed to <a asp-controller="User" asp-action="Login">Login</a>
-            </h1>       
+            </h1>
         </div>
-        
+
     }
 }

@@ -5,20 +5,24 @@
 }
 
 @{
-    if (!String.IsNullOrWhiteSpace(ViewBag.message))
-    {
-        <div class="">
-            <h6 class="h6 mb-3 font-weight-normal text-center">
-                @ViewBag.message
-            </h6>
-        </div>
-    }
+    
     <form class="form-signin py-5 justify-content-md-center" asp-controller="User" asp-action="Login" method="post">
         <br />
         <br />
         <br />
         <br />
         <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+        @if (!String.IsNullOrWhiteSpace(ViewBag.message))
+        {
+            <div class="error py-2">
+                <h6 class="h6 mb-3 font-weight-normal text-center">
+                    @ViewBag.message
+                </h6>
+                <div class="col-md-10 text-semi">
+                    Not a member yet? <a asp-controller="User" asp-action="Signup" class="btn btn-primary my-2 justify-content-between">Sign Up</a>
+                </div>
+            </div>
+        }
         <div class="row py-2">
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>

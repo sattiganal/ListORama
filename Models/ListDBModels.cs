@@ -53,6 +53,7 @@ namespace ListORama.Models
         [Key]
         public int listId { get; set; }
         public String listName { get; set; }
+        public String listDescription { get; set; }
         public String listType { get; set; }
         public List<UserListItem> listItems { get; set; }
         public List<UserListUserMap> listUserMaps { get; set; }
