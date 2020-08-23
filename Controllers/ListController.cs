@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using ListORama.DataAccess;
 using ListORama.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using Newtonsoft.Json;
 
 namespace ListORama.Controllers
 {
@@ -24,6 +26,33 @@ namespace ListORama.Controllers
         public IActionResult CreateList ()
         {
             return View();
+        }
+
+        public IActionResult AddList(UserList list)
+        {
+            String sessionList = HttpContext.Session.GetString("currentList");
+            UserList currentList = null;
+            if(!String.IsNullOrWhiteSpace(sessionList))
+                currentList = JsonConvert.DeserializeObject<UserList>(sessionList);
+
+            if (null != list && !String.IsNullOrWhiteSpace(list.listName))
+            {
+                String newItemAdded = list.newItem;
+                UserListItem listItem = new UserListItem();
+                listItem.itemName = newItemAdded;
+                if (null != currentList)
+                {
+                    currentList.listName = list.listName;
+                    list = currentList;
+                }
+                if (null == list.listItems)
+                {
+                    list.listItems = new List<UserListItem>();
+                }
+                list.listItems.Add(listItem);
+                HttpContext.Session.SetString("currentList", JsonConvert.SerializeObject(list));
+            }
+            return View(list);
         }
 
 

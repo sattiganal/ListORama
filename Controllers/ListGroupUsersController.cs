@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ListORama.DataAccess;
 using ListORama.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace ListORama.Controllers
 {
@@ -23,7 +24,8 @@ namespace ListORama.Controllers
         // GET: ListGroupUsers
         public async Task<IActionResult> Index()
         {
-            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
+            User loggedInUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
+            userID = loggedInUser.userID;
             var dropdownVD1 = new SelectList(_context.listgroups.Where(x => x.userID == userID).OrderBy(x => x.listGroupName).ToList(), "listGroupID", "listGroupName");
             ViewData["GroupDataVD"] = dropdownVD1;
             selectedGroupID = Convert.ToInt32(dropdownVD1.Select(x => x.Value).FirstOrDefault());
@@ -79,11 +81,8 @@ namespace ListORama.Controllers
         // GET: ListGroupUsers/Create
         public IActionResult Create()
         {
-            //using viewdata 
-            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
-            //userID = 1;
-            //userID = Convert.ToInt16(@TempData["UserID"]);
-            //TempData["UserID"] = userID;
+            User loggedInUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
+            userID = loggedInUser.userID;
             var dropdownVD = new SelectList(_context.users.ToList(), "userID", "fullName");
             ViewData["StudDataVD"] = dropdownVD;
             var dropdownVD1 = new SelectList(_context.listgroups.Where(x => x.userID == userID).ToList(), "listGroupID", "listGroupName");
