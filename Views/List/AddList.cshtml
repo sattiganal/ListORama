@@ -1,0 +1,104 @@
+﻿@model UserList
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@{
+    ViewData["Title"] = "CreateList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User loggedInUser = JsonConvert.DeserializeObject<User>(@Context.Session.GetString("loggedInUser"));
+}
+<main role="main" class="container">
+    <form class="py-5 justify-content-md-center" asp-controller="List" asp-action="AddList" method="post">
+        <div class="my-3 px-2 bkgd-white rounded box-shadow">
+            <div class="row">
+                <div class="py-2 px-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" class="svg-inline--fa fa-user-circle fa-w-16" role="img" aria-hidden="true" viewBox="0 0 496 512" focusable="false"
+                         data-icon="user-circle" data-prefix="fas">
+                        <path fill="#1c96dc" d="M 248 8 C 111 8 0 119 0 256 s 111 248 248 248 s 248 -111 248 -248 S 385 8 248 8 Z m 0 96 c 48.6 0 88 39.4 88 88 s -39.4 88 -88 88 s -88 -39.4 -88 -88 s 39.4 -88 88 -88 Z m 0 344 c -58.7 0 -111.3 -26.6 -146.5 -68.2 c 18.8 -35.4 55.6 -59.8 98.5 -59.8 c 2.4 0 4.8 0.4 7.1 1.1 c 13 4.2 26.6 6.9 40.9 6.9 c 14.3 0 28 -2.7 40.9 -6.9 c 2.3 -0.7 4.7 -1.1 7.1 -1.1 c 42.9 0 79.7 24.4 98.5 59.8 C 359.3 421.4 306.7 448 248 448 Z" />
+                    </svg>
+                </div>
+                <div class="col-md-4 ">
+                    <p class="text-semi">
+                        <b>@loggedInUser.fullName</b>&nbsp;
+                        <a href="CreateList.html" data-toggle="tooltip" title="Edit Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="svg-inline--fa fa-user-edit fa-w-20" role="img" aria-hidden="true" viewBox="0 0 640 512" focusable="false"
+                                 data-icon="user-edit" data-prefix="fas">
+                                <path fill="#1c96dc" d="M 224 256 c 70.7 0 128 -57.3 128 -128 S 294.7 0 224 0 S 96 57.3 96 128 s 57.3 128 128 128 Z m 89.6 32 h -16.7 c -22.2 10.2 -46.9 16 -72.9 16 s -50.6 -5.8 -72.9 -16 h -16.7 C 60.2 288 0 348.2 0 422.4 V 464 c 0 26.5 21.5 48 48 48 h 274.9 c -2.4 -6.8 -3.4 -14 -2.6 -21.3 l 6.8 -60.9 l 1.2 -11.1 l 7.9 -7.9 l 77.3 -77.3 c -24.5 -27.7 -60 -45.5 -99.9 -45.5 Z m 45.3 145.3 l -6.8 61 c -1.1 10.2 7.5 18.8 17.6 17.6 l 60.9 -6.8 l 137.9 -137.9 l -71.7 -71.7 l -137.9 137.8 Z M 633 268.9 L 595.1 231 c -9.3 -9.3 -24.5 -9.3 -33.8 0 l -37.8 37.8 l -4.1 4.1 l 71.8 71.7 l 41.8 -41.8 c 9.3 -9.4 9.3 -24.5 0 -33.9 Z" />
+                            </svg>
+                        </a>
+                    </p>
+                    <p class="small">Member since June 2019</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="my-3 p-3 bkgd-white rounded box-shadow">
+            <div class="menurow py-1 float-right">
+                <div class="col-sm-4">
+                    <div>
+                        <a asp-controller="User" asp-action="Dashboard" data-toggle="tooltip" title="Dashboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="svg-inline--fa fa-list-alt fa-w-16" role="img" aria-hidden="true" viewBox="0 0 512 512" focusable="false"
+                                 data-icon="list-alt" data-prefix="fas">
+                                <path fill="#1c96dc" d="M 464 480 H 48 c -26.51 0 -48 -21.49 -48 -48 V 80 c 0 -26.51 21.49 -48 48 -48 h 416 c 26.51 0 48 21.49 48 48 v 352 c 0 26.51 -21.49 48 -48 48 Z M 128 120 c -22.091 0 -40 17.909 -40 40 s 17.909 40 40 40 s 40 -17.909 40 -40 s -17.909 -40 -40 -40 Z m 0 96 c -22.091 0 -40 17.909 -40 40 s 17.909 40 40 40 s 40 -17.909 40 -40 s -17.909 -40 -40 -40 Z m 0 96 c -22.091 0 -40 17.909 -40 40 s 17.909 40 40 40 s 40 -17.909 40 -40 s -17.909 -40 -40 -40 Z m 288 -136 v -32 c 0 -6.627 -5.373 -12 -12 -12 H 204 c -6.627 0 -12 5.373 -12 12 v 32 c 0 6.627 5.373 12 12 12 h 200 c 6.627 0 12 -5.373 12 -12 Z m 0 96 v -32 c 0 -6.627 -5.373 -12 -12 -12 H 204 c -6.627 0 -12 5.373 -12 12 v 32 c 0 6.627 5.373 12 12 12 h 200 c 6.627 0 12 -5.373 12 -12 Z m 0 96 v -32 c 0 -6.627 -5.373 -12 -12 -12 H 204 c -6.627 0 -12 5.373 -12 12 v 32 c 0 6.627 5.373 12 12 12 h 200 c 6.627 0 12 -5.373 12 -12 Z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <h6 class="border-bottom border-gray pb-2 mb-0">
+                New List
+            </h6>
+            <div class="media text-muted pt-3">
+                <div class="row px-2 col-md-7">
+                    <div class="col-md-9 px-2">
+                        <label for="listName" class="sr-only">List Name</label>
+                        <input name="listName" type="text" id="listName" class="form-control" placeholder="List Name" required autofocus value="@Model.listName">
+                    </div>
+                    <div class="col-sm-auto">
+                        <a href="CreateList.html" data-toggle="tooltip" title="Add Item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" class="svg-inline--fa fa-save fa-w-14" role="img" aria-hidden="true" viewBox="0 0 448 512" focusable="false" data-icon="save"
+                                 data-prefix="fas">
+                                <path fill="#1c96dc" d="M 433.941 129.941 l -83.882 -83.882 A 48 48 0 0 0 316.118 32 H 48 C 21.49 32 0 53.49 0 80 v 352 c 0 26.51 21.49 48 48 48 h 352 c 26.51 0 48 -21.49 48 -48 V 163.882 a 48 48 0 0 0 -14.059 -33.941 Z M 224 416 c -35.346 0 -64 -28.654 -64 -64 c 0 -35.346 28.654 -64 64 -64 s 64 28.654 64 64 c 0 35.346 -28.654 64 -64 64 Z m 96 -304.52 V 212 c 0 6.627 -5.373 12 -12 12 H 76 c -6.627 0 -12 -5.373 -12 -12 V 108 c 0 -6.627 5.373 -12 12 -12 h 228.52 c 3.183 0 6.235 1.264 8.485 3.515 l 3.48 3.48 A 11.996 11.996 0 0 1 320 111.48 Z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <h6 class="border-bottom border-gray pb-2 mb-0">
+                List Items
+            </h6>
+            <div class="row pt-3">
+                <div class="col-md-5 px-2">
+                    <input name="newItem" type="text" id="listItems1" class="form-control" placeholder="Item Name" />
+                </div>
+                <div class="col-sm-auto">
+                    <a href="javascript:void(0)" data-toggle="tooltip" title="Add Item" class="AddItem">
+                        <path fill="#1c96dc" d="M 256 8 C 119 8 8 119 8 256 s 111 248 248 248 s 248 -111 248 -248 S 393 8 256 8 Z m 144 276 c 0 6.6 -5.4 12 -12 12 h -92 v 92 c 0 6.6 -5.4 12 -12 12 h -56 c -6.6 0 -12 -5.4 -12 -12 v -92 h -92 c -6.6 0 -12 -5.4 -12 -12 v -56 c 0 -6.6 5.4 -12 12 -12 h 92 v -92 c 0 -6.6 5.4 -12 12 -12 h 56 c 6.6 0 12 5.4 12 12 v 92 h 92 c 6.6 0 12 5.4 12 12 v 56 Z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="svg-inline--fa fa-arrow-circle-down fa-w-16" role="img" aria-hidden="true" viewBox="0 0 512 512" focusable="false"
+                             data-icon="arrow-circle-down" data-prefix="fas">
+                            <path fill="#1c96dc" d="M 504 256 c 0 137 -111 248 -248 248 S 8 393 8 256 S 119 8 256 8 s 248 111 248 248 Z m -143.6 -28.9 L 288 302.6 V 120 c 0 -13.3 -10.7 -24 -24 -24 h -16 c -13.3 0 -24 10.7 -24 24 v 182.6 l -72.4 -75.5 c -9.3 -9.7 -24.8 -9.9 -34.3 -0.4 l -10.9 11 c -9.4 9.4 -9.4 24.6 0 33.9 L 239 404.3 c 9.4 9.4 24.6 9.4 33.9 0 l 132.7 -132.7 c 9.4 -9.4 9.4 -24.6 0 -33.9 l -10.9 -11 c -9.5 -9.5 -25 -9.3 -34.3 0.4 Z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="row pt-3 px-2">
+                @if (null != Model.listItems)
+                {
+                    @foreach (UserListItem listItem in Model.listItems)
+                    {
+                        <div class="col-md-5 px-2">
+                            @listItem.itemName &nbsp;  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" aria-hidden="true" viewBox="0 0 448 512"
+                                                focusable="false" data-icon="trash-alt" data-prefix="fas">
+                                <path fill="#1c96dc" d="M 32 464 a 48 48 0 0 0 48 48 h 288 a 48 48 0 0 0 48 -48 V 128 H 32 Z m 272 -256 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z m -96 0 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z m -96 0 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z M 432 32 H 312 l -9.4 -18.7 A 24 24 0 0 0 281.1 0 H 166.8 a 23.72 23.72 0 0 0 -21.4 13.3 L 136 32 H 16 A 16 16 0 0 0 0 48 v 32 a 16 16 0 0 0 16 16 h 416 a 16 16 0 0 0 16 -16 V 48 a 16 16 0 0 0 -16 -16 Z" />
+                            </svg>
+                        </div>
+                    }
+                }
+                <input type="hidden" name="listItems"/>
+            </div>
+        </div>
+    </form>
+</main>
+<script>
+    $('.AddItem').click(function () {
+        $(this).closest('form')[0].submit();
+    });
+</script>

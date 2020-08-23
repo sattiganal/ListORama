@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,5 +38,22 @@ namespace ListORama.Models
     public class ItemList
     {
         public List<ShoppingList> ItemsList { get; set; }
+    }
+
+    public class UserList
+    {
+        [Key]
+        public int listId { get; set; }
+        public String listName { get; set; }
+        public String listType { get; set; }
+        public String newItem { get; set; }
+        public List<UserListItem> listItems { get; set; }
+    }
+
+    public class UserListItem
+    {
+        [Key]
+        public int listItemId { get; set; }
+        public String itemName { get; set; }
     }
 }
