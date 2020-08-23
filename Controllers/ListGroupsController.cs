@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ListORama.DataAccess;
 using ListORama.Models;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace ListORama.Controllers
 {
@@ -14,7 +16,7 @@ namespace ListORama.Controllers
     {
         private readonly ApplicationDBContext _context;
         private int userID;
-        
+
         public ListGroupsController(ApplicationDBContext context)
         {
             _context = context;
@@ -22,8 +24,9 @@ namespace ListORama.Controllers
 
         // GET: ListGroups1
         public async Task<IActionResult> Index()
-        {            
-            userID = Convert.ToInt16(@TempData.Peek("currentUserUserId"));
+        {
+            User loggedInUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
+            userID = loggedInUser.userID;
             var list1 = (from g in _context.listgroups
                          where g.userID == userID
                          select new ListGroup
@@ -33,7 +36,6 @@ namespace ListORama.Controllers
                              userID = g.userID
                          }).ToList();
             return View(list1);
-            //return View(await _context.listgroups.ToListAsync());
         }
 
         // GET: ListGroups/Details/5
@@ -57,8 +59,9 @@ namespace ListORama.Controllers
         // GET: ListGroups/Create
         public IActionResult Create()
         {
-            
-            userID = Convert.ToInt16(TempData.Peek("currentUserUserId"));
+
+            User loggedInUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
+            userID = loggedInUser.userID;
             ListGroup newListGroup = new ListGroup();
             newListGroup.listGroupName = "";
             newListGroup.listGroupID = 0;

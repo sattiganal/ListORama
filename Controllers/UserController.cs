@@ -69,14 +69,8 @@ namespace ListORama.Controllers
                     byte[] suppliedPswd = GenerateSaltedHash(Encoding.UTF8.GetBytes(userPswd), u.salt);
                     if(CompareByteArrays(suppliedPswd, u.password))
                     {
-                        //HttpContext.Session.SetString("currentUser", JsonConvert.SerializeObject(u));
-                        currentUserUserId = u.userID;
-                        //TempData["currentUserUserId"] = currentUserUserId;
-                        return RedirectToAction("Index", "ListGroups");
-                        //return RedirectToAction("Dashboard", "User");
-
-
-
+                        HttpContext.Session.SetString("loggedInUser", JsonConvert.SerializeObject(u));
+                        return RedirectToAction("Dashboard", "User");
                     }
 
                 }
@@ -89,8 +83,8 @@ namespace ListORama.Controllers
 
         public IActionResult Dashboard()
         {
-            String loggedInUser = Convert.ToString(TempData.Peek("currentUserUserId"));
-            if(String.IsNullOrWhiteSpace(loggedInUser) || loggedInUser.Equals("0"))
+            User loggedInUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
+            if(null == loggedInUser)
             {
                 return RedirectToAction("Login", "User");
             }
