@@ -24,7 +24,9 @@ namespace ListORama.DataAccess
                 .HasKey(o => new { o.listID, o.listItems });
         }
 
-
+        public DbSet<UserList> lists { get; set; }
+        public DbSet<UserListItem> listItems { get; set; }
+        public DbSet<UserListUserMap> listUserMap { get; set; }
 
         public DbSet<ListGroup> listgroups { get; set; }
         public DbSet<ListGroupUser> listgroupusers { get; set; }

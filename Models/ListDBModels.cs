@@ -31,13 +31,21 @@ namespace ListORama.Models
         //public List<String> listItems { get; set; }
         [System.ComponentModel.DataAnnotations.Key][System.ComponentModel.DataAnnotations.Schema.Column(Order = 2)]
         public String listItems { get; set; }
-//        public String listItem2 { get; set; }
-//        public String listItem3 { get; set; }
+        //        public String listItem2 { get; set; }
+        //        public String listItem3 { get; set; }
     }    
 
     public class ItemList
     {
         public List<ShoppingList> ItemsList { get; set; }
+    }
+
+    public class UserListUserMap
+    {
+        [Key]
+        public int mapId { get; set; }
+        public UserList listId { get; set; }
+        public User userId { get; set; }  
     }
 
     public class UserList
@@ -46,8 +54,8 @@ namespace ListORama.Models
         public int listId { get; set; }
         public String listName { get; set; }
         public String listType { get; set; }
-        public String newItem { get; set; }
         public List<UserListItem> listItems { get; set; }
+        public List<UserListUserMap> listUserMaps { get; set; }
     }
 
     public class UserListItem
@@ -55,5 +63,6 @@ namespace ListORama.Models
         [Key]
         public int listItemId { get; set; }
         public String itemName { get; set; }
+        public UserList list { get; set; }
     }
 }

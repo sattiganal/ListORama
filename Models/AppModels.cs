@@ -44,4 +44,19 @@ namespace ListORama.Models
         public string fullName { get; set; }
         public string latitude { get; set; }
     }
+
+    public class MyList
+    {
+        public String listName { get; set; }
+        public String listType { get; set; }
+        public String newItem { get; set; }
+        public List<MyListItem> listItems { get; set; }
+        public String userAction { get; set; }
+        public String listItemToRemove { get; set; }
+    }
+
+    public class MyListItem
+    {
+        public String itemName { get; set; }
+    }
 }

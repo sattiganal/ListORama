@@ -31,6 +31,7 @@ namespace ListORama.Models
         public String state { get; set; }
         public String zip { get; set; }
         public List<UserGroupMember> userGroupMembership { get; set; }
+        public List<UserListUserMap> userListMaps { get; set; }
     }
 
     public class UserGroup

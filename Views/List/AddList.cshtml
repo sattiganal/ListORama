@@ -1,4 +1,4 @@
-﻿@model UserList
+﻿@model MyList
 @using Microsoft.AspNetCore.Http
 @using Newtonsoft.Json
 @{
@@ -53,7 +53,7 @@
                         <input name="listName" type="text" id="listName" class="form-control" placeholder="List Name" required autofocus value="@Model.listName">
                     </div>
                     <div class="col-sm-auto">
-                        <a href="CreateList.html" data-toggle="tooltip" title="Add Item">
+                        <a asp-action="SaveList" data-toggle="tooltip" title="Save List">
                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" class="svg-inline--fa fa-save fa-w-14" role="img" aria-hidden="true" viewBox="0 0 448 512" focusable="false" data-icon="save"
                                  data-prefix="fas">
                                 <path fill="#1c96dc" d="M 433.941 129.941 l -83.882 -83.882 A 48 48 0 0 0 316.118 32 H 48 C 21.49 32 0 53.49 0 80 v 352 c 0 26.51 21.49 48 48 48 h 352 c 26.51 0 48 -21.49 48 -48 V 163.882 a 48 48 0 0 0 -14.059 -33.941 Z M 224 416 c -35.346 0 -64 -28.654 -64 -64 c 0 -35.346 28.654 -64 64 -64 s 64 28.654 64 64 c 0 35.346 -28.654 64 -64 64 Z m 96 -304.52 V 212 c 0 6.627 -5.373 12 -12 12 H 76 c -6.627 0 -12 -5.373 -12 -12 V 108 c 0 -6.627 5.373 -12 12 -12 h 228.52 c 3.183 0 6.235 1.264 8.485 3.515 l 3.48 3.48 A 11.996 11.996 0 0 1 320 111.48 Z" />
@@ -82,23 +82,33 @@
             <div class="row pt-3 px-2">
                 @if (null != Model.listItems)
                 {
-                    @foreach (UserListItem listItem in Model.listItems)
+                    @foreach (MyListItem listItem in Model.listItems)
                     {
                         <div class="col-md-5 px-2">
-                            @listItem.itemName &nbsp;  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" aria-hidden="true" viewBox="0 0 448 512"
-                                                focusable="false" data-icon="trash-alt" data-prefix="fas">
-                                <path fill="#1c96dc" d="M 32 464 a 48 48 0 0 0 48 48 h 288 a 48 48 0 0 0 48 -48 V 128 H 32 Z m 272 -256 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z m -96 0 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z m -96 0 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z M 432 32 H 312 l -9.4 -18.7 A 24 24 0 0 0 281.1 0 H 166.8 a 23.72 23.72 0 0 0 -21.4 13.3 L 136 32 H 16 A 16 16 0 0 0 0 48 v 32 a 16 16 0 0 0 16 16 h 416 a 16 16 0 0 0 16 -16 V 48 a 16 16 0 0 0 -16 -16 Z" />
+                            @listItem.itemName &nbsp; <a href="javascript:removeItemFromList('@listItem.itemName')" data-toggle="tooltip" title="Remove Item" class="RemoveItem">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" aria-hidden="true" viewBox="0 0 448 512"
+                                focusable="false" data-icon="trash-alt" data-prefix="fas">
+                            <path fill="#1c96dc" d="M 32 464 a 48 48 0 0 0 48 48 h 288 a 48 48 0 0 0 48 -48 V 128 H 32 Z m 272 -256 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z m -96 0 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z m -96 0 a 16 16 0 0 1 32 0 v 224 a 16 16 0 0 1 -32 0 Z M 432 32 H 312 l -9.4 -18.7 A 24 24 0 0 0 281.1 0 H 166.8 a 23.72 23.72 0 0 0 -21.4 13.3 L 136 32 H 16 A 16 16 0 0 0 0 48 v 32 a 16 16 0 0 0 16 16 h 416 a 16 16 0 0 0 16 -16 V 48 a 16 16 0 0 0 -16 -16 Z" />
                             </svg>
+                            </a>
                         </div>
                     }
                 }
-                <input type="hidden" name="listItems"/>
+                <input type="hidden" name="userAction" id="userAction"/>
+                <input type="hidden" name="listItemToRemove" id="listItem"/>
             </div>
         </div>
     </form>
 </main>
 <script>
     $('.AddItem').click(function () {
+        $('#userAction').val("ADD");
         $(this).closest('form')[0].submit();
     });
+
+    function removeItemFromList (itemName) {
+        $('#userAction').val("REMOVE");
+        $('#listItem').val(itemName);
+        $('.RemoveItem').closest('form')[0].submit();
+    };
 </script>

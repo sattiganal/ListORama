@@ -28,31 +28,90 @@ namespace ListORama.Controllers
             return View();
         }
 
-        public IActionResult AddList(UserList list)
+        public IActionResult AddList(MyList list)
         {
             String sessionList = HttpContext.Session.GetString("currentList");
-            UserList currentList = null;
+            MyList currentList = null;
             if(!String.IsNullOrWhiteSpace(sessionList))
-                currentList = JsonConvert.DeserializeObject<UserList>(sessionList);
+                currentList = JsonConvert.DeserializeObject<MyList>(sessionList);
+            String formAction = list.userAction;
 
             if (null != list && !String.IsNullOrWhiteSpace(list.listName))
             {
-                String newItemAdded = list.newItem;
-                UserListItem listItem = new UserListItem();
-                listItem.itemName = newItemAdded;
-                if (null != currentList)
+                if ("ADD".Equals(formAction))
                 {
-                    currentList.listName = list.listName;
-                    list = currentList;
+                    String newItemAdded = list.newItem;
+                    MyListItem listItem = new MyListItem();
+                    listItem.itemName = newItemAdded;
+                    if (null != currentList)
+                    {
+                        currentList.listName = list.listName;
+                        list = currentList;
+                    }
+                    if (null == list.listItems)
+                    {
+                        list.listItems = new List<MyListItem>();
+                    }
+                    list.listItems.Add(listItem);
                 }
-                if (null == list.listItems)
+                else if("REMOVE".Equals(formAction))
                 {
-                    list.listItems = new List<UserListItem>();
+                    String removeItemName = list.listItemToRemove;
+                    if (null != currentList)
+                    {
+                        currentList.listName = list.listName;
+                        list = currentList;
+                    }
+                    MyListItem itemToRemove = null;
+                    foreach(MyListItem item in list.listItems)
+                    {
+                        if (item.itemName.Equals(removeItemName))
+                        {
+                            itemToRemove = item;
+                            break;
+                        }
+                    }
+                    list.listItems.Remove(itemToRemove);
                 }
-                list.listItems.Add(listItem);
                 HttpContext.Session.SetString("currentList", JsonConvert.SerializeObject(list));
             }
             return View(list);
+        }
+
+        public IActionResult SaveList(UserList list)
+        {
+            String sessionList = HttpContext.Session.GetString("currentList");
+            MyList currentList = null;
+            if (!String.IsNullOrWhiteSpace(sessionList))
+                currentList = JsonConvert.DeserializeObject<MyList>(sessionList);
+            User loggedInUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
+            User listUser = dbContext.users
+                                    .Where(c => c.userID == loggedInUser.userID)
+                                    .FirstOrDefault();
+
+            UserList listToSave = new UserList();
+            List<UserListItem> itemsToSave = new List<UserListItem>();
+
+            listToSave.listName = currentList.listName;
+            listToSave.listType = "SHOPPING";
+            listToSave.listItems = itemsToSave;
+            foreach(MyListItem listeItem in currentList.listItems)
+            {
+                UserListItem itemToSave = new UserListItem();
+                itemToSave.itemName = listeItem.itemName;
+                itemToSave.list = listToSave;
+                itemsToSave.Add(itemToSave);
+                dbContext.listItems.Add(itemToSave);
+            }
+
+            UserListUserMap listUserMapping = new UserListUserMap();
+            listUserMapping.listId = listToSave;
+            listUserMapping.userId = listUser;
+
+            dbContext.listUserMap.Add(listUserMapping);
+            dbContext.lists.Add(listToSave);
+            dbContext.SaveChanges();
+            return RedirectToAction("Dashboard","User");
         }
 
 
@@ -60,6 +119,10 @@ namespace ListORama.Controllers
         [HttpPost]
         public IActionResult CreateList(ItemList ListObjs)
         {
+            User loggedInUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
+            User u = dbContext.users
+                                    .Where(c => c.userID == loggedInUser.userID)
+                                    .FirstOrDefault();
             ShoppingList shoppingListCreated = null;
             ItemList items = ListObjs;
             string sListName = " ";
@@ -95,7 +158,6 @@ namespace ListORama.Controllers
                     shoppingListCreated.listID = maxShoppingListId + 1;
 
                     shoppingListCreated.listStatus = "Open";
-
 
                     dbContext.shoppingList.Add(shoppingListCreated);
                     dbContext.SaveChanges();
