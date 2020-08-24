@@ -23,7 +23,7 @@ namespace ListORama
         {
             services.AddSession(so => 
             {
-                so.IdleTimeout = TimeSpan.FromSeconds(60);
+                so.IdleTimeout = TimeSpan.FromSeconds(900);
             });
 
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(Configuration["Data:Listorama:ConnectionString"]));
