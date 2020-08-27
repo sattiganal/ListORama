@@ -66,4 +66,25 @@ namespace ListORama.Models
     {
         public List<MyList> listsOwned { get; set; }
     }
+
+    public class Store
+    {
+        public String name { get; set; }
+        public String location { get; set; }
+        public String URL { get; set; }
+        public StorePreview preview { get; set; }
+    }
+    public class Stores
+    {
+        public String result { get; set; }
+        public Store[] stores { get; set; }
+    }
+
+    public class StorePreview
+    {
+        public String image { get; set; }
+        public String title { get; set; }
+        public String description { get; set; }
+        public String url { get; set; }
+    }
 }

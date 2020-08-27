@@ -6,9 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using ListORama.DataAccess;
 using ListORama.Models;
+using ListORama.Util;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 
 namespace ListORama.Controllers
@@ -16,12 +19,14 @@ namespace ListORama.Controllers
     public class UserController : Controller
     {
         private ApplicationDBContext dbContext;
+        private IMemoryCache _cache;
 
         [TempData]
         public int currentUserUserId { get; set; }
-        public UserController(ApplicationDBContext context)
+        public UserController(ApplicationDBContext context, IMemoryCache cache)
         {
             dbContext = context;
+            _cache = cache;
         }
 
         public IActionResult Index()
@@ -83,7 +88,7 @@ namespace ListORama.Controllers
                 {
                     String userPswd = user.pswdString;
                     byte[] suppliedPswd = GenerateSaltedHash(Encoding.UTF8.GetBytes(userPswd), u.salt);
-                    if(CompareByteArrays(suppliedPswd, u.password))
+                    if (CompareByteArrays(suppliedPswd, u.password))
                     {
                         HttpContext.Session.SetString("loggedInUser", JsonConvert.SerializeObject(u));
                         return RedirectToAction("Dashboard", "User");
@@ -92,7 +97,7 @@ namespace ListORama.Controllers
                 }
 
                 ViewBag.message = "Invalid Username/Password.";
-                    
+
             }
             return View();
         }
@@ -100,7 +105,7 @@ namespace ListORama.Controllers
         public IActionResult Dashboard()
         {
             User loggedInUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("loggedInUser"));
-            if(null == loggedInUser)
+            if (null == loggedInUser)
             {
                 return RedirectToAction("Login", "User");
             }
@@ -111,7 +116,7 @@ namespace ListORama.Controllers
                                                     .Include(p => p.userId)
                                                     .Where(c => c.userId.userID == loggedInUser.userID).ToList<UserListUserMap>();
             List<MyList> listsOwnded = new List<MyList>();
-            foreach(UserListUserMap map in userListMap)
+            foreach (UserListUserMap map in userListMap)
             {
                 UserList list = map.listId;
                 MyList dashBoardList = new MyList();
@@ -120,7 +125,7 @@ namespace ListORama.Controllers
                 dashBoardList.listName = list.listName;
                 dashBoardList.description = list.listDescription;
                 dashBoardList.listType = list.listType;
-                foreach(UserListItem item in list.listItems)
+                foreach (UserListItem item in list.listItems)
                 {
                     MyListItem listItem = new MyListItem();
                     listItem.itemName = item.itemName;
@@ -187,7 +192,7 @@ namespace ListORama.Controllers
                         .First();
             if (group1 == null)
             {
-                group1 =  new UserGroup();
+                group1 = new UserGroup();
                 group1.groupName = "Jon Doe's Group";
                 group1.groupOwner = user1;
                 group1.groupStatus = "Active";
@@ -285,6 +290,59 @@ namespace ListORama.Controllers
             }
 
             return true;
+        }
+
+        public IActionResult StoreOffers()
+        {
+
+            Stores stores = HomeController.SearchOffers();
+            List<Store> usStoresWithOffers = new List<Store>();
+            foreach (Store store in stores.stores)
+            {
+                String country = store.location;
+                if (!String.IsNullOrWhiteSpace(country))
+                {
+                    String[] countries = country.Split(",");
+                    foreach (String countryCode in countries)
+                    {
+                        if ("United States".Equals(countryCode) || "USA".Equals(countryCode))
+                        {
+                            usStoresWithOffers.Add(store);
+                        }
+                    }
+                }
+            }
+
+            List<Store> sampledUSStores = null;
+            if (!_cache.TryGetValue<List<Store>>("us.sample.stores", out sampledUSStores))
+            {
+                sampledUSStores = GetSampledUSStores(usStoresWithOffers);
+                _cache.Set<List<Store>>("us.sample.stores", sampledUSStores);
+            }
+                
+            Stores usStores = new Stores();
+            usStores.result = "";
+            usStores.stores = sampledUSStores.ToArray();
+            return View(usStores);
+        }
+
+        public static List<Store>  GetSampledUSStores(List<Store> allUSStores)
+        {
+            List<Store> sampledUSStores = new List<Store>();
+            int i = 0;
+            foreach (Store element in allUSStores.OrderByDescending(key => key.name))
+            {
+                if (i == 20)
+                {
+                    break;
+                }
+                StorePreview preview = HomeController.GetPreview(element);
+                element.preview = preview;
+                sampledUSStores.Add(element);
+                i++;
+
+            }
+            return sampledUSStores;
         }
     }
 }

@@ -7,8 +7,7 @@
 <br />
 <br />
 <div class="form-signup py-5 justify-content-between">
-    <h2>This is a Demo chart page to demonstrate API consumption and charting capability.</h2>
-    <h6>This page uses Parks API from NPS to fetch and store 20 parks' data. Retrieving this daat from DB, a doughnut chart is generated using chart.js (v2.9.3) for # of parks by states. Go back to 
+    <h6>This page uses <a href="https://couponapi.org/api/getStores/">Stores API</a> from <a href="https://couponapi.org/">Coupon API</a> collections to fetch and store a list of stores running offers. It then aggregates offers by country to show top 10 countries with most offers. This page uses charts.js (v2.9.3) to generate the chart. Go back to 
     <a asp-controller="User" asp-action="Dashboard">Dashboard</a></h6>
     <div style="style=" width: 400px; margin: auto; float:none"">
         <canvas id="parksByState"></canvas>
@@ -19,9 +18,9 @@
                     type: '@Model.chartType',
                     data: {
                         datasets: [{
+                            label: 'Top 10 Countries with offers',
                             data: [@Model.data],
-                            backgroundColor: [@Html.Raw(@Model.backgroundColors)],
-                            label: 'Dataset 1'
+                            backgroundColor: [@Html.Raw(@Model.backgroundColors)]
                         }],
                         labels: [@Html.Raw(@Model.labels)]
                     },

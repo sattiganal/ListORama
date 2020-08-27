@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
+using ListORama.Util;
 
 namespace ListORama
 {
@@ -29,6 +30,8 @@ namespace ListORama
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(Configuration["Data:Listorama:ConnectionString"]));
 
             services.AddControllersWithViews();
+
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

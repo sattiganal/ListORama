@@ -11,16 +11,13 @@
                         <a asp-controller="Home" asp-action="Index" data-toggle="tooltip" title="Back to Home Page">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="svg-inline--fa fa-home fa-w-18" role="img" aria-hidden="true" viewBox="0 0 576 512" focusable="false" data-icon="home"
                                  data-prefix="fas">
-                            <path fill="#1c96dc" d="M 280.37 148.26 L 96 300.11 V 464 a 16 16 0 0 0 16 16 l 112.06 -0.29 a 16 16 0 0 0 15.92 -16 V 368 a 16 16 0 0 1 16 -16 h 64 a 16 16 0 0 1 16 16 v 95.64 a 16 16 0 0 0 16 16.05 L 464 480 a 16 16 0 0 0 16 -16 V 300 L 295.67 148.26 a 12.19 12.19 0 0 0 -15.3 0 Z M 571.6 251.47 L 488 182.56 V 44.05 a 12 12 0 0 0 -12 -12 h -56 a 12 12 0 0 0 -12 12 v 72.61 L 318.47 43 a 48 48 0 0 0 -61 0 L 4.34 251.47 a 12 12 0 0 0 -1.6 16.9 l 25.5 31 A 12 12 0 0 0 45.15 301 l 235.22 -193.74 a 12.19 12.19 0 0 1 15.3 0 L 530.9 301 a 12 12 0 0 0 16.9 -1.6 l 25.5 -31 a 12 12 0 0 0 -1.7 -16.93 Z" /></svg>
+                                <path fill="#1c96dc" d="M 280.37 148.26 L 96 300.11 V 464 a 16 16 0 0 0 16 16 l 112.06 -0.29 a 16 16 0 0 0 15.92 -16 V 368 a 16 16 0 0 1 16 -16 h 64 a 16 16 0 0 1 16 16 v 95.64 a 16 16 0 0 0 16 16.05 L 464 480 a 16 16 0 0 0 16 -16 V 300 L 295.67 148.26 a 12.19 12.19 0 0 0 -15.3 0 Z M 571.6 251.47 L 488 182.56 V 44.05 a 12 12 0 0 0 -12 -12 h -56 a 12 12 0 0 0 -12 12 v 72.61 L 318.47 43 a 48 48 0 0 0 -61 0 L 4.34 251.47 a 12 12 0 0 0 -1.6 16.9 l 25.5 31 A 12 12 0 0 0 45.15 301 l 235.22 -193.74 a 12.19 12.19 0 0 1 15.3 0 L 530.9 301 a 12 12 0 0 0 16.9 -1.6 l 25.5 -31 a 12 12 0 0 0 -1.7 -16.93 Z" />
+                            </svg>
                         </a>
                     </div>
                 </div>
             </div>
-            <h6 class="border-bottom border-gray">Project Group</h6>
-            <div class="col-md-9">
-                <span class="text-semi">Shyam Attiganal, Brian Hammond and Venkata Sivarama Telaprolu</span>
-            </div>
-            <h6 class="border-bottom border-gray">About List-O-Rama (Business Service)</h6>
+            <h6 class="border-bottom border-gray">List-O-Rama (Business Service)</h6>
             <div class="col-md-9">
                 <span class="text-semi">
                     List-O-Rama is a platform for :
@@ -34,47 +31,54 @@
                         <li>
                             The platform <strong>connects users with merchants </strong>for mutual benefits. Users get suggestions and discounts.  Merchants get customers and insights
                         </li>
+                        <li>
+                            For now, we have used free version of <a href="https://couponapi.org/api/getStores/" target="_blank">Stores API</a> from <a target="_blank" href="https://couponapi.org/">Coupon API</a> collections for stores running offers that can be made available to users. In the long run, we want to collaborate with paid services/affiliates for better quality data.
+                        </li>
                     </ul>
                 </span>
             </div>
-            <h6 class="border-bottom border-gray">Key Points</h6>
+            <h6 class="border-bottom border-gray">Project Group</h6>
             <div class="col-md-9">
                 <span class="text-semi">
                     <ul>
-                        <li><strong>API Consumption</strong> : The app consumes NPS API for chart data. We couldn't find an API related to our app so used the NPS API instead.</li>
-                        <li><strong>Usability + Look & Feel</strong> : Works well on devices of all size, small (mobile phones), medium (tablets) and big (desktops).We have used SVGs in place of images as they are lite weight and scale well easily across devices.Easy nvigation with large buttons and fewer clicks. Non verbose links have tooltips. The site runs same on all different browsers.</li>
-                        <li><strong>Many-to-Many Relationships</strong> : Users and Lists, Users and Groups</li>
                         <li>
-                            <strong>CRUD Operations</strong>:
-                            <ul>
-                                <li><strong>Create</strong> - User Signup, List Creation, Creation of Groups and Group Memebers</li>
-                                <li><strong>Read</strong> - User Login, List Dashboard, Groups and Group Memebers display</li>
-                                <li><strong>Update</strong> - Groups and Group Memebers updates</li>
-                                <li><strong>Delete</strong> - Delete List items, Groups and Group memebers</li>
-                            </ul>
+                            <strong>Shyam Attiganal</strong> is a techno-functional analyst with 15+ years of FinTech industry experience.  He has been in various roles ranging from programming to business analysis, while building IT solutions for FX Trading, Equity Research and Core Compliance teams of financial institutions. In his current role as a Senior Applications Development Manager for Citi, Shyam is overseeing development of a strategic global platform for Independent Compliance Risk Management division's portals program.
                         </li>
                         <li>
-                            <strong>Chart</strong> : Doughnut chart using NPS API on Dashboard </svg> and Breakup of lits (Chart) <svg xmlns="http://www.w3.org/2000/svg" width="10pt" height="10pt" class="svg-inline--fa fa-chart-pie fa-w-17" role="img" aria-hidden="true" viewBox="0 0 544 512" focusable="false"
-                                                                                                                                       data-icon="chart-pie" data-prefix="fas">
-                                <path fill="#1c96dc" d="M 527.79 288 H 290.5 l 158.03 158.03 c 6.04 6.04 15.98 6.53 22.19 0.68 c 38.7 -36.46 65.32 -85.61 73.13 -140.86 c 1.34 -9.46 -6.51 -17.85 -16.06 -17.85 Z m -15.83 -64.8 C 503.72 103.74 408.26 8.28 288.8 0.04 C 279.68 -0.59 272 7.1 272 16.24 V 240 h 223.77 c 9.14 0 16.82 -7.68 16.19 -16.8 Z M 224 288 V 50.71 c 0 -9.55 -8.39 -17.4 -17.84 -16.06 C 86.99 51.49 -4.1 155.6 0.14 280.37 C 4.5 408.51 114.83 513.59 243.03 511.98 c 50.4 -0.63 96.97 -16.87 135.26 -44.03 c 7.9 -5.6 8.42 -17.23 1.57 -24.08 L 224 288 Z" />
-                            </svg>
+                            <strong>Brian Hammond </strong>  is the VP - Chief Technology Officer for Tampa General Hospital. Brian has over 25 years of experience working in Information Technology and is responsible for the IT infrastructure, communications, system integration, analytics, biomedical equipment, and data architecture of the organization. Brian enjoys the challenges of healthcare and working with clinical teams to improve efficiency. Prior to TGH, Brian managed application development teams for various organizations developing custom database applications.
                         </li>
-                        <li><strong>Password Hashing</strong> : We store user passwords hashed with a salt for security</li>
+                        <li>
+                            <strong>Venkata Sivarama Telaprolu</strong>  is an Associate Director at DTCC and has over a decade of experience working there on various software development projects especially in the Risk domain. He loves coding innovative applications. His fluency in various computer languages combined with his high analytical and problem-solving skills helps him solve various production problems and manage multiple projects at once. Venkata worked for UPS, Huntington Bank, HSBC and WellPoint in the past. He has a Bachelor of Engineering degree in Electronics & Communication from the University of Madras. He is currently pursuing Master of Science in Business Analytics and Information Systems from the University of South Florida.
+                        </li>
                     </ul>
                 </span>
             </div>
-            <h6 class="border-bottom border-gray">Working Links</h6>
-            <div class="col-md-9">
-                <span class="text-semi">
+            <!-- <h6 class="border-bottom border-gray">Key Points</h6>
+    <div class="col-md-9">
+        <span class="text-semi">
+            <ul>
+                <li><strong>API Consumption</strong> : The app consumes NPS API for chart data. We couldn't find an API related to our app so used the NPS API instead.</li>
+                <li><strong>Usability + Look & Feel</strong> : Works well on devices of all size, small (mobile phones), medium (tablets) and big (desktops).We have used SVGs in place of images as they are lite weight and scale well easily across devices.Easy nvigation with large buttons and fewer clicks. Non verbose links have tooltips. The site runs same on all different browsers.</li>
+                <li><strong>Many-to-Many Relationships</strong> : Users and Lists, Users and Groups</li>
+                <li>
+                    <strong>CRUD Operations</strong>:
                     <ul>
-                        <li><strong>Welcome Page</strong> : Sign me up already!, About Us and Login</li>
-                        <li><strong>Login</strong></li>
-                        <li>
-                            <strong>Dashboard </strong>(shown upon successfule login) : Add List, Groups, Group Memebers and Chart
-                        </li>
+                        <li><strong>Create</strong> - User Signup, List Creation, Creation of Groups and Group Memebers</li>
+                        <li><strong>Read</strong> - User Login, List Dashboard, Groups and Group Memebers display</li>
+                        <li><strong>Update</strong> - Groups and Group Memebers updates</li>
+                        <li><strong>Delete</strong> - Delete List items, Groups and Group memebers</li>
                     </ul>
-                </span>
-            </div>
+                </li>
+                <li>
+                    <strong>Chart</strong> : Doughnut chart using NPS API on Dashboard <svg xmlns="http://www.w3.org/2000/svg" width="10pt" height="10pt" class="svg-inline--fa fa-chart-pie fa-w-17" role="img" aria-hidden="true" viewBox="0 0 544 512" focusable="false"
+                                                                                                                               data-icon="chart-pie" data-prefix="fas">
+                        <path fill="#1c96dc" d="M 527.79 288 H 290.5 l 158.03 158.03 c 6.04 6.04 15.98 6.53 22.19 0.68 c 38.7 -36.46 65.32 -85.61 73.13 -140.86 c 1.34 -9.46 -6.51 -17.85 -16.06 -17.85 Z m -15.83 -64.8 C 503.72 103.74 408.26 8.28 288.8 0.04 C 279.68 -0.59 272 7.1 272 16.24 V 240 h 223.77 c 9.14 0 16.82 -7.68 16.19 -16.8 Z M 224 288 V 50.71 c 0 -9.55 -8.39 -17.4 -17.84 -16.06 C 86.99 51.49 -4.1 155.6 0.14 280.37 C 4.5 408.51 114.83 513.59 243.03 511.98 c 50.4 -0.63 96.97 -16.87 135.26 -44.03 c 7.9 -5.6 8.42 -17.23 1.57 -24.08 L 224 288 Z" />
+                    </svg>
+                </li>
+                <li><strong>Password Hashing</strong> : We store user passwords hashed with a salt for security</li>
+            </ul>
+        </span>
+    </div>-->
         </div>
     </main>
     
