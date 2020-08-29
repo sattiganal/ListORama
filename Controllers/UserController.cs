@@ -329,18 +329,13 @@ namespace ListORama.Controllers
         public static List<Store>  GetSampledUSStores(List<Store> allUSStores)
         {
             List<Store> sampledUSStores = new List<Store>();
-            int i = 0;
-            foreach (Store element in allUSStores.OrderByDescending(key => key.name))
+            var rand = new Random();
+            for(int sCount = 1; sCount <= 26; sCount++)
             {
-                if (i == 20)
-                {
-                    break;
-                }
-                StorePreview preview = HomeController.GetPreview(element);
-                element.preview = preview;
-                sampledUSStores.Add(element);
-                i++;
-
+                var index = rand.Next(allUSStores.Count);
+                StorePreview preview = HomeController.GetPreview(allUSStores[index]);
+                allUSStores[index].preview = preview;
+                sampledUSStores.Add(allUSStores[index]);
             }
             return sampledUSStores;
         }
